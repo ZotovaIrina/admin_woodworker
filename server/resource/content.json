@@ -93,7 +93,8 @@
             "caption": ""
           }
         ],
-        "description": "template/room.html"
+        "description": "template/room.html",
+        "name": "Комната"
       },
       "rocking_chair": {
         "images": [
@@ -182,7 +183,8 @@
             "caption": ""
           }
         ],
-        "description": "template/rocking_chair.html"
+        "description": "template/rocking_chair.html",
+        "name": "Кресло-качалка"
       },
       "garden_furniture": {
         "images": [
@@ -267,7 +269,8 @@
             "caption": ""
           }
         ],
-        "description": "template/garden_furniture.html"
+        "description": "template/garden_furniture.html",
+        "name": "Садовая мебель"
       },
       "kitchen": {
         "images": [
@@ -320,7 +323,8 @@
             "caption": "Кухонный фасад из лиственницы. Цена: 3 000р"
           }
         ],
-        "description": "template/kitchen.html"
+        "description": "template/kitchen.html",
+        "name": "Кухня"
       },
       "other": {
         "images": [
@@ -373,7 +377,8 @@
             "caption": ""
           }
         ],
-        "description": "template/other.html"
+        "description": "template/other.html",
+        "name": "Прочее"
       },
       "baby": {
         "images": [
@@ -386,7 +391,8 @@
             "caption": "4 000р"
           }
         ],
-        "description": "template/baby.html"
+        "description": "template/baby.html",
+        "name": "Детская мебель"
       }
     }
   }

@@ -44,12 +44,30 @@
         </div>
         <div class="col-xs-4" id="sideMenu" ng-controller="sideMenu as menu">
             <h2>Выберете раздел сайта:</h2>
-            <ul>
-                <li ng-repeat="section in menu.sections">
-                    <p>{{section}}</p>
 
-                </li>
-            </ul>
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                <div class="panel panel-default" ng-repeat="section in menu.sections">
+                    <div class="panel-heading" role="tab" id="heading-{{section}}">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{section}}"
+                               aria-expanded="false" aria-controls="collapse-{{section}}">
+                                <p>{{menu.contents[section].name}}</p>
+
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapse-{{section}}" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="heading-{{section}}">
+                        <div class="panel-body">
+                            <p>{{section}}</p>
+                            {{ menu.contents[section].description}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
 

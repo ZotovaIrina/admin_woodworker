@@ -2,8 +2,7 @@ $backcolor: #ffbf80;
 
 .jumbotron {
     margin: 0 auto;
-    padding: 70px 30px;
-    background: $backcolor;
+    background: ($backcolor*0.3);
     color: floralwhite;
 }
 

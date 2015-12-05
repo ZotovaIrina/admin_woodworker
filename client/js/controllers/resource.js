@@ -1,25 +1,21 @@
 var app = require("../app");
 
-app.controller('resourceCtrl', function ($resource) {
-    this.section = ["room", "rocking_chair", "garden_furniture", "kitchen", "other", "baby"];
+app.controller('sideMenu', function ($resource) {
     var contentJson = $resource('resource/content.json').get().$promise;
+    var controller = this;
     contentJson.then(
         function onSuccess(resource) {
             if (resource.success) {
 
                 var contents = resource.data.content;
                 console.log(contents);
+                controller.contents = contents;
+                controller.sections = Object.keys(contents);
             }
         },
         function onError() {
             console.error(arguments);
         }
     );
-
-});
-
-app.controller('sideMenu', function () {
-
-    this.sections = ["room", "rocking_chair", "garden_furniture", "kitchen", "other", "baby"];
 
 });
