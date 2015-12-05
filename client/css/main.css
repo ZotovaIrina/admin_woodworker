@@ -1,0 +1,28 @@
+.jumbotron {
+  margin: 0 auto;
+  padding: 70px 30px;
+  background: #ffbf80;
+  color: floralwhite;
+}
+
+.container {
+  min-height: 100%;
+}
+
+.row-header {
+  margin: 0 auto;
+  padding: 0 0;
+}
+
+.row-content {
+  margin: 0 auto;
+  padding: 50px 0;
+  border-bottom: 1px ridge;
+  min-height: 400px;
+}
+
+#sideMenu {
+  background: #ffbf80;
+}
+
+/*# sourceMappingURL=main.css.map */

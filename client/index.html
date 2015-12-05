@@ -1,12 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="admin_woodworker">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+
     <title>Admin system for website vzlobin.ru</title>
+
+    <link href="css/main.css" rel="stylesheet">
 
 </head>
 <body>
-<p> Hello app </p>
-<script src="js/bundle.js"></script>
+
+<header class="jumbotron">
+
+    <div class="container">
+
+        <div class="row row-header">
+            <div class="col-xs-12">
+                <h1>Управление сайтом VZLOBIN.RU</h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row row-header">
+
+
+        <div class="col-xs-8" id="content">
+
+            <p> Hello app </p>
+
+        </div>
+        <div class="col-xs-4" id="sideMenu" ng-controller="sideMenu as menu">
+            <h2>Выберете раздел сайта:</h2>
+            <ul>
+                <li ng-repeat="section in menu.sections">
+                    <p>{{section}}</p>
+
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+</div>
+
+</div>
+<script src="js/build.js"></script>
+
 </body>
 </html>

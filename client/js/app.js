@@ -1,5 +1,3 @@
-global.jQuery = require('jquery');
-$ = require('jquery');
+var app = angular.module('admin_woodworker', ['ngResource']);
 
-var date = $.get("content.json");
-console.log(date);
+module.exports = app;
