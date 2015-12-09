@@ -5,15 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
-          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-
     <title>Admin system for website vzlobin.ru</title>
 
     <link href="css/main.css" rel="stylesheet">
@@ -41,6 +32,7 @@
 
             <p> Hello app </p>
 
+
         </div>
         <div class="col-xs-4" id="sideMenu" ng-controller="sideMenu as menu">
             <h2>Выберете раздел сайта:</h2>
@@ -60,8 +52,8 @@
                     <div id="collapse-{{section}}" class="panel-collapse collapse" role="tabpanel"
                          aria-labelledby="heading-{{section}}">
                         <div class="panel-body">
-                            <p>{{section}}</p>
-                            {{ menu.contents[section].description}}
+                            <a href="#">{{section}}</a>
+                            <a href="#">{{ menu.contents[section].description}}</a>
                         </div>
                     </div>
                 </div>
