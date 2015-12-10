@@ -1,0 +1,24 @@
+    <h2>Выберете раздел сайта:</h2>
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+        <div class="panel panel-default" ng-repeat="section in sections">
+            <div class="panel-heading" role="tab" id="heading-{{section}}">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{section}}"
+                       aria-expanded="false" aria-controls="collapse-{{section}}">
+                        <p>{{contents[section].name}}</p>
+
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse-{{section}}" class="panel-collapse collapse" role="tabpanel"
+                 aria-labelledby="heading-{{section}}">
+                <div class="panel-body">
+                    <a ng-href="/template/mediaFoto.html" class="list-group-item" ng-click="select(1)">Фото раздела {{contents[section].name}}</a>
+                    <a href="#" class="list-group-item">{{contents[section].description}}</a>
+                </div>
+            </div>
+        </div>
+
+    </div>

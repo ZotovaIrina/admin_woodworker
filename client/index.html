@@ -28,40 +28,9 @@
     <div class="row row-header">
 
 
-        <div class="col-xs-8" id="content">
+        <div class="col-xs-8" id="content" ng-view></div>
 
-            <p> Hello app </p>
-            <div media-Foto-Directive class="menu-div"></div>
-
-        </div>
-        <div class="col-xs-4" id="sideMenu" ng-controller="SideMenu">
-            <h2>Выберете раздел сайта:</h2>
-
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-                <div class="panel panel-default" ng-repeat="section in sections">
-                    <div class="panel-heading" role="tab" id="heading-{{section}}">
-                        <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{section}}"
-                               aria-expanded="false" aria-controls="collapse-{{section}}">
-                                <p>{{contents[section].name}}</p>
-
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapse-{{section}}" class="panel-collapse collapse" role="tabpanel"
-                         aria-labelledby="heading-{{section}}">
-                        <div class="panel-body">
-                            <a href="#" class="list-group-item" ng-click="select(1)">Фото раздела {{contents[section].name}}</a>
-                            <a href="#" class="list-group-item">{{contents[section].description}}</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
+        <div menu-directive class="col-xs-4 menu-div" id="sideMenu"></div>
 
     </div>
 </div>
