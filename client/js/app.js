@@ -7,13 +7,16 @@ app.config(['$routeProvider',
             when('/', {
                 templateUrl: 'template/start.html'
             }).
-            when('/mediaFoto', {
-                templateUrl: 'template/mediaFoto.html',
+            when('/mediaPhoto', {
+                templateUrl: 'template/mediaPhoto.html',
                 controller: 'fotoController'
 
             }).
-            when('/**', {
-                templateUrl: 'template/start.html'
+            when('/templateEditor', {
+                templateUrl: 'template/templateEditor.html'
+            }).
+            otherwise({
+                redirectTo: '/'
             });
     }]);
 
