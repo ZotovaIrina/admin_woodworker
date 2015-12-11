@@ -24,18 +24,17 @@
     </div>
 </header>
 
-<div class="container">
-    <div class="row row-header">
+<div class="container" ng-controller="ResourseCtrl">
+    <div class="row row-content">
 
 
-        <div class="col-xs-8" id="content" ng-view></div>
+        <div class="col-xs-8" id="content" ng-view role="main"></div>
 
-        <div menu-directive class="col-xs-4 menu-div" id="sideMenu"></div>
+        <div menu-directive class="col-xs-4 menu-div" id="sideMenu" role="complementary"></div>
 
     </div>
 </div>
 
-</div>
 <script src="js/build.js"></script>
 
 </body>

@@ -1,14 +1,15 @@
 var app = require("../app");
 
-app.controller('SideMenu', ['$scope', '$resource', function ($scope, $resource) {
+app.controller('ResourseCtrl', ['$scope', '$resource', function ($scope, $resource) {
     var contentJson = $resource('resource/content.json').get().$promise;
     contentJson.then(
         function onSuccess(resource) {
             if (resource.success) {
                 var contents = resource.data.content;
-                $scope.contents = contents;
+                $scope.contents = contents;             //all object for all pages
                 console.log(contents);
-                $scope.sections = Object.keys(contents);
+                $scope.sections = Object.keys(contents);        //object with key = name page
+
 
             }
         },
@@ -18,3 +19,5 @@ app.controller('SideMenu', ['$scope', '$resource', function ($scope, $resource) 
     );
 
 }]);
+
+
