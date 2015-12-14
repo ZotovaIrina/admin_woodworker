@@ -44,10 +44,18 @@
   position: relative;
 }
 
-.media-photo-img {
+.media-photo-img-vertical {
   position: absolute;
-  width: auto;
+  top: -30%;
+  width: 157.5px;
   height: auto;
+}
+
+.media-photo-img-horizontal {
+  position: absolute;
+  left: -30%;
+  height: 157.5px;
+  width: auto;
 }
 
 .media-caption {

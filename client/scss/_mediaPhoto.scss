@@ -13,11 +13,18 @@ $mediawidth: 175px;
   position: relative;
 }
 
-.media-photo-img {
+.media-photo-img-vertical {
   position: absolute;
-
-  width: auto;
+  top: -30%;
+  width: ($mediawidth * 0.9);
   height: auto;
+}
+
+.media-photo-img-horizontal {
+  position: absolute;
+  left: -30%;
+  height: ($mediawidth * 0.9);
+  width: auto;
 }
 
 .media-caption {
