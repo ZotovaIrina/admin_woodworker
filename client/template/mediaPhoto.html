@@ -1,18 +1,28 @@
 <div class="col-xs-12">
     <div class="media mediaPhoto"  ng-repeat="image in images">
-        <div class="media-top media-middle">
-            <div class="img-wrap img-rounded ">
-                <img class="media-object media-photo-img-horizontal" orientable
+        <div class="media-top img-wrap img-rounded ">
+                <img class="media-object media-photo-img-hide" orientable
                  ng-src="resource/photo/big/room/{{image.name}}">
-            </div>
         </div>
         <div class="media-body ">
             <p class="media-caption" >{{image.caption}}</p>
 
         </div>
         <div class="media-footer">
-            <button class="btn btn-block btn-danger">Delete</button>
-            <button class="btn btn-block btn-info">Edit</button>
+            <button type="button"
+                    class="btn btn-block btn-info"
+                    data-toggle="modal"
+                    data-target="#photoModelEdit"
+                    data-image="{{image.name}}"
+                    data-caption="{{image.caption}}">
+                Edit {{image.name}}
+            </button>
+            <button type="button"
+                    class="btn btn-block btn-danger">
+                Delete
+            </button>
         </div>
     </div>
 </div>
+
+<div photo-model-edit></div>

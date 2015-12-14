@@ -1,30 +1,39 @@
-$mediawidth: 175px;
+$mediaWidth: 175px;
+$photoWidth: $mediaWidth - 30px;
 
 .mediaPhoto {
   display: inline-block;
   padding: 15px;
-  width: $mediawidth;
+  width: $mediaWidth;
 }
 
 .img-wrap {
-  width: ($mediawidth * 0.9);
-  height: ($mediawidth * 0.9);
+
+  height: $photoWidth;
   overflow: hidden;
   position: relative;
+
 }
 
 .media-photo-img-vertical {
   position: absolute;
   top: -30%;
-  width: ($mediawidth * 0.9);
+  width: $photoWidth;
   height: auto;
 }
 
 .media-photo-img-horizontal {
   position: absolute;
   left: -30%;
-  height: ($mediawidth * 0.9);
+  height: $photoWidth;
   width: auto;
+}
+
+.media-photo-img-hide {
+  display: block;
+  background: url("../resource/camera.png") ;
+  opacity: 0.1;
+  width: $photoWidth;
 }
 
 .media-caption {

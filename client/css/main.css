@@ -38,8 +38,7 @@
 }
 
 .img-wrap {
-  width: 157.5px;
-  height: 157.5px;
+  height: 145px;
   overflow: hidden;
   position: relative;
 }
@@ -47,20 +46,31 @@
 .media-photo-img-vertical {
   position: absolute;
   top: -30%;
-  width: 157.5px;
+  width: 145px;
   height: auto;
 }
 
 .media-photo-img-horizontal {
   position: absolute;
   left: -30%;
-  height: 157.5px;
+  height: 145px;
   width: auto;
+}
+
+.media-photo-img-hide {
+  display: block;
+  background: url("../resource/camera.png");
+  opacity: 0.1;
+  width: 145px;
 }
 
 .media-caption {
   height: 2em;
   text-overflow: ellipsis;
+}
+
+#model-photo-img {
+  width: 250px;
 }
 
 /*# sourceMappingURL=main.css.map */
