@@ -9,7 +9,7 @@ app.config(['$routeProvider',
             }).
             when('/mediaPhoto', {
                 templateUrl: 'template/mediaPhoto.html',
-                controller: 'fotoController'
+                controller: 'PhotoController'
 
             }).
             when('/templateEditor', {

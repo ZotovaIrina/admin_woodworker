@@ -31,4 +31,28 @@
   opacity: 0.1;
 }
 
+.mediaPhoto {
+  display: inline-block;
+  padding: 15px;
+  width: 175px;
+}
+
+.img-wrap {
+  width: 157.5px;
+  height: 157.5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.media-photo-img {
+  position: absolute;
+  width: auto;
+  height: auto;
+}
+
+.media-caption {
+  height: 2em;
+  text-overflow: ellipsis;
+}
+
 /*# sourceMappingURL=main.css.map */

@@ -1,0 +1,26 @@
+$mediawidth: 175px;
+
+.mediaPhoto {
+  display: inline-block;
+  padding: 15px;
+  width: $mediawidth;
+}
+
+.img-wrap {
+  width: ($mediawidth * 0.9);
+  height: ($mediawidth * 0.9);
+  overflow: hidden;
+  position: relative;
+}
+
+.media-photo-img {
+  position: absolute;
+
+  width: auto;
+  height: auto;
+}
+
+.media-caption {
+  height: 2em;
+  text-overflow: ellipsis;
+}
