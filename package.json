@@ -5,8 +5,10 @@
   "main": "./js/app.js",
   "dependencies": {
     "angular": "^1.4.8",
+    "angular-animate": "^1.4.8",
     "angular-resource": "^1.4.8",
     "angular-route": "^1.4.8",
+    "angular-ui-bootstrap": "^0.14.3",
     "bootstrap": "^3.3.6",
     "browserify": "^12.0.1",
     "browserify-shim": "^3.8.11",
@@ -36,8 +38,17 @@
         "jquery:$",
         "bootstrap",
         "angular:angular",
+        "angular-animate",
         "angular-route",
-        "angular-resource"
+        "angular-resource",
+        "angular-ui-bootstrap"
+      ]
+    },
+    "ui.bootstrap": {
+      "depends": [
+        "angular:angular",
+        "angular-animate",
+        "bootstrap"
       ]
     }
   },

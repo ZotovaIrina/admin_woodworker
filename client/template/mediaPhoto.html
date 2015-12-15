@@ -11,10 +11,7 @@
         <div class="media-footer">
             <button type="button"
                     class="btn btn-block btn-info"
-                    data-toggle="modal"
-                    data-target="#photoModelEdit"
-                    data-image="{{image.name}}"
-                    data-caption="{{image.caption}}">
+                    ng-click="open(image)">
                 Edit {{image.name}}
             </button>
             <button type="button"
@@ -24,5 +21,7 @@
         </div>
     </div>
 </div>
-
 <div photo-model-edit></div>
+
+
+

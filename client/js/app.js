@@ -1,5 +1,5 @@
 
-var app = angular.module('admin_woodworker', ['ngRoute', 'ngResource']);
+var app = angular.module('admin_woodworker', ['ngRoute', 'ngResource', 'ngAnimate', 'ui.bootstrap']);
 
 app.config(['$routeProvider',
     function ($routeProvider) {
