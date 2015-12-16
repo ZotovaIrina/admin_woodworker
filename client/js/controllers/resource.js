@@ -7,7 +7,6 @@ app.controller('ResourseCtrl', ['$scope', '$resource', function ($scope, $resour
             if (resource.success) {
                 var contents = resource.data.content;
                 $scope.contents = contents;             //all object for all pages
-                console.log(contents);
                 $scope.sections = Object.keys(contents);        //object with key = name page
 
 
