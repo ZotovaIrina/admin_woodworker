@@ -2,10 +2,16 @@ $backcolor: #ffbf80;
 
 .jumbotron {
     margin: 0 auto;
-    background: ($backcolor*0.3);
+    padding-top: 0;
+    height: 100px;
+    background: url("../resource/bg-body.png");;
     color: floralwhite;
 }
 
+.head-link, .head-link:hover {
+    text-decoration: none;
+    color: floralwhite;
+}
 
 .container {
     min-height: 100%;

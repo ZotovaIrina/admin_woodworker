@@ -19,6 +19,7 @@ app.directive('photoModelEdit', function () {
 
             $scope.open = function (image) {
                 $scope.img = angular.copy(image);
+
                 //$uibModal is a service to quickly create AngularJS-powered modal windows
                 //resolve - members that will be resolved and passed to the controller as locals; it is equivalent of the resolve property for AngularJS routes
                 var modalInstance = $uibModal.open({
@@ -28,8 +29,6 @@ app.directive('photoModelEdit', function () {
                         $scope.img = img;
 
                         $scope.ok = function () { // при нажатии на ок закрывается окно и выше передается выбранный айтам
-                            console.log('ok');
-                            console.log($scope.img.caption);
                             updateImage(img);
                             $uibModalInstance.close();
                         };

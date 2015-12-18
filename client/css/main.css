@@ -2,7 +2,14 @@
 @import url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css");
 .jumbotron {
   margin: 0 auto;
-  background: #4d3926;
+  padding-top: 0;
+  height: 100px;
+  background: url("../resource/bg-body.png");
+  color: floralwhite;
+}
+
+.head-link, .head-link:hover {
+  text-decoration: none;
   color: floralwhite;
 }
 
