@@ -13,11 +13,10 @@ app.directive('photoModelEdit', function () {
                         indexObj = key;
                     }
                 });
-
                 $scope.images[indexObj].caption = img.caption;
             };
 
-            $scope.open = function (image) {
+            $scope.open = function (image, src) {
                 $scope.img = angular.copy(image);
 
                 //$uibModal is a service to quickly create AngularJS-powered modal windows
@@ -27,7 +26,7 @@ app.directive('photoModelEdit', function () {
                     templateUrl: 'photoModelEdit.html',
                     controller: ['$scope', '$uibModalInstance', 'img', function ($scope, $uibModalInstance, img) {
                         $scope.img = img;
-
+                        $scope.src = src;
                         $scope.ok = function () { // при нажатии на ок закрывается окно и выше передается выбранный айтам
                             updateImage(img);
                             $uibModalInstance.close();

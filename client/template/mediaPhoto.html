@@ -2,7 +2,7 @@
     <div class="media mediaPhoto"  ng-repeat="image in images">
         <div class="media-top img-wrap img-rounded ">
                 <img class="media-object media-photo-img-hide" orientable
-                 ng-src="resource/photo/big/other/{{image.name}}">
+                 ng-src="{{src}}{{image.name}}">
         </div>
         <div class="media-body ">
             <p class="media-caption" >{{image.caption}}</p>
@@ -11,7 +11,7 @@
         <div class="media-footer">
             <button type="button"
                     class="btn btn-block btn-info"
-                    ng-click="open(image)">
+                    ng-click="open(image, src)">
                 Edit {{image.name}}
             </button>
             <button type="button"

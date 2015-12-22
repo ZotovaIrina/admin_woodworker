@@ -32,16 +32,5 @@ app.service('adminService', ['$resource', '$q', function ($resource, $q) {
     };
 
 
-//
-//this.getPhotos = function (index) {
-//    //get all photo for page with name index
-//    console.log('get photo');
-//    return contentPage(index).images;
-//};
-//this.getDescription = function (index) {    //get template for page with name index
-//    console.log('get template');
-//    return contentPage(index).description;
-//};
-
 }])
 ;
