@@ -18,23 +18,19 @@
 
         <div class="row row-header">
             <div class="col-xs-12">
-           <a class="head-link" href="#/">
-               <h1>Управление сайтом VZLOBIN.RU</h1>
-           </a>
+                <a class="head-link" href="#/">
+                    <h1>Управление сайтом VZLOBIN.RU</h1>
+                </a>
             </div>
         </div>
     </div>
 </header>
 
-<div class="container" ng-controller="ResourseCtrl">
-    <div class="row row-content">
+<div class="row row-content">
 
+    <div ui-view="content" class="col-xs-8" id="content"></div>
+    <div ui-view="menu" class="col-xs-4 menu-div" id="sideMenu"></div>
 
-        <div class="col-xs-8" id="content" ng-view role="main"></div>
-
-        <div menu-directive class="col-xs-4 menu-div" id="sideMenu" role="complementary"></div>
-
-    </div>
 </div>
 
 <script src="js/build.js"></script>

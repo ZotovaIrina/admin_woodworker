@@ -5,8 +5,12 @@
         <div class="panel panel-default" ng-repeat="section in sections">
             <div class="panel-heading" role="tab" id="heading-{{section}}">
                 <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapse-{{section}}"
-                       aria-expanded="false" aria-controls="collapse-{{section}}">
+                    <a role="button"
+                       data-toggle="collapse"
+                       data-parent="#accordion"
+                       data-target="#collapse-{{section}}"
+                       aria-expanded="false"
+                       aria-controls="collapse-{{section}}">
                         <p>{{contents[section].name}}</p>
 
                     </a>
@@ -15,8 +19,14 @@
             <div id="collapse-{{section}}" class="panel-collapse collapse" role="tabpanel"
                  aria-labelledby="heading-{{section}}">
                 <div class="panel-body">
-                    <a ng-href="#/mediaPhoto" class="list-group-item">Фото раздела {{contents[section].name}}</a>
-                    <a href="#/templateEditor" class="list-group-item">{{contents[section].description}}</a>
+                    <a ui-sref="app.mediaPhoto({id: section})"
+                       class="list-group-item">
+                        Фото раздела {{contents[section].name}}
+                    </a>
+                    <a ui-sref="app.templateEditor({id: section})"
+                       class="list-group-item">
+                        {{contents[section].description}}
+                    </a>
                 </div>
             </div>
         </div>

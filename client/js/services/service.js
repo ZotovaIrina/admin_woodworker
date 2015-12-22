@@ -1,26 +1,47 @@
 var app = require("../app");
 
 
-app.service('adminService', [function () {
+app.service('adminService', ['$resource', '$q', function ($resource, $q) {
 
-       var information,
-        contentPage;
+    var contentJson = function () {
+        var promise = $resource('resource/content.json').get().$promise;
 
+        return promise
+            .then(function (resource) {
+                if (resource.success) {
+                    return resource.data.content;
+                } else {
+                    return $q.reject('not success');
+                }
+            });
 
-    this.setInfo = function (contents) {    //get contents within resource controller
-        information = contents;
     };
 
-    contentPage = function (index) {  //get all photo and template for page with name index
-        return information[index];
-    };
+    var info = contentJson();
 
-    this.getPhotos = function (index) {     //get all photo for page with name index
-        return contentPage(index).images;
-    };
-    this.getDescription = function (index) {    //get template for page with name index
-        return contentPage(index).description;
+    this.getContents = function () {
+        return info;
     };
 
 
-}]);
+    this.getSections = function () {
+        return info.then(function (contents) {
+            return Object.keys(contents);
+        });
+
+    };
+
+
+//
+//this.getPhotos = function (index) {
+//    //get all photo for page with name index
+//    console.log('get photo');
+//    return contentPage(index).images;
+//};
+//this.getDescription = function (index) {    //get template for page with name index
+//    console.log('get template');
+//    return contentPage(index).description;
+//};
+
+}])
+;

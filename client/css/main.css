@@ -5,12 +5,12 @@
   padding-top: 0;
   height: 100px;
   background: url("../resource/bg-body.png");
-  color: floralwhite;
+  color: #FFD119;
 }
 
 .head-link, .head-link:hover {
   text-decoration: none;
-  color: floralwhite;
+  color: #FFD119;
 }
 
 .container {

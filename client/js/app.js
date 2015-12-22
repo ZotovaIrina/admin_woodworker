@@ -1,27 +1,39 @@
+var app = angular.module('admin_woodworker', ['ui.router', 'ngResource', 'ngAnimate', 'ui.bootstrap']);
 
-var app = angular.module('admin_woodworker', ['ngRoute', 'ngResource', 'ngAnimate', 'ui.bootstrap']);
-
-app.config(['$routeProvider',
-    function ($routeProvider) {
-        $routeProvider.
-            when('/', {
-                templateUrl: 'template/start.html'
-            }).
-            when('/mediaPhoto', {
-                templateUrl: 'template/mediaPhoto.html',
-                controller: 'PhotoController'
-
-            }).
-            when('/templateEditor', {
-                templateUrl: 'template/templateEditor.html'
-            }).
-            otherwise({
-                redirectTo: '/'
+app.config(['$stateProvider', '$urlRouterProvider',
+    function ($stateProvider, $urlRouterProvider) {
+        $stateProvider
+            .state('app', {
+                url: '/',
+                views: {
+                    'content': {
+                        templateUrl: 'template/start.html'
+                    },
+                    'menu': {
+                        templateUrl: 'template/menu.html',
+                        controller: 'Menu'
+                    }
+                }
+            })
+            .state('app.mediaPhoto', {
+                url:'mediaPhoto/:id',
+                views: {
+                    'content@': {
+                        templateUrl : 'template/mediaPhoto.html',
+                        controller  : 'PhotoController'
+                    }
+                }
+            })
+            .state('app.templateEditor', {
+                url:'templateEditor/:id',
+                views: {
+                    'content@': {
+                        templateUrl : 'template/templateEditor.html'
+                    }
+                }
             });
+        $urlRouterProvider.otherwise('/');
     }]);
-
-
-
 
 
 module.exports = app;
