@@ -16,16 +16,16 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'adminService', '$t
 
     $scope.modalDelete = function (image) {            //open modal delete window
         $scope.activeImage = image;
-        $( "body" ).addClass("lock");
-        $( ".substrate" ).addClass("modal");
-                $scope.modalDel = true;
+        $("body").addClass("lock");
+        $(".substrate").addClass("modal");
+        $scope.modalDel = true;
     };
 
     $scope.modalClose = function () {       //close modal window
         $scope.modalDel = false;
         $scope.modalEd = false;
-        $( "body" ).removeClass("lock");
-        $( ".substrate" ).removeClass("modal");
+        $("body").removeClass("lock");
+        $(".substrate").removeClass("modal");
     };
 
 
@@ -37,25 +37,28 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'adminService', '$t
                 indexObj = key;
             }
         });
+        if (indexObj !== undefined) {
         $scope.images.splice(indexObj, 1);
-        console.log("delete", name, indexObj);
         $scope.modalDel = false;
-        $( "body" ).removeClass("lock");
-        $( ".substrate" ).removeClass("modal");
+        $("body").removeClass("lock");
+        $(".substrate").removeClass("modal");
         $scope.alert = true;
         $timeout(function () {
             $scope.alert = false;
         }, 1700);
+        } else{
+            console.log("Элемент не найден");
+        }
     };
 
     $scope.modalEdit = function (image) {            //open modal delete window
         $scope.activeImage = angular.copy(image);
-        $( "body" ).addClass("lock");
-        $( ".substrate" ).addClass("modal");
+        $("body").addClass("lock");
+        $(".substrate").addClass("modal");
         $scope.modalEd = true;
     };
 
-    $scope.EditPhoto = function(){          //edit photo's caption
+    $scope.EditPhoto = function () {          //edit photo's caption
         var indexObj;
         var name = $scope.activeImage.name;
         angular.forEach($scope.images, function (image, key) {
@@ -63,11 +66,14 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'adminService', '$t
                 indexObj = key;
             }
         });
-        $scope.images[indexObj].caption = $scope.activeImage.caption;
-        console.log("Edit");
-        $scope.modalEd = false;
-        $( "body" ).removeClass("lock");
-        $( ".substrate" ).removeClass("modal");
+        if (indexObj !== undefined) {
+            $scope.images[indexObj].caption = $scope.activeImage.caption;
+            $scope.modalEd = false;
+            $("body").removeClass("lock");
+            $(".substrate").removeClass("modal");
+        } else{
+            console.log("Элемент не найден");
+        }
     };
 
 }]);
