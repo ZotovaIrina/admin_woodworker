@@ -31,7 +31,7 @@ $photoWidth: $mediaWidth - 30px;
 
 .media-photo-img-hide {
   display: block;
-  background: url("../resource/camera.png") ;
+  background: url("../resource/camera.png");
   opacity: 0.1;
   width: $photoWidth;
 }
@@ -39,4 +39,72 @@ $photoWidth: $mediaWidth - 30px;
 .media-caption {
   height: 2em;
   text-overflow: ellipsis;
+}
+
+.media-add {
+  display: inline-block;
+  width: $mediaWidth;
+  height: 255px;
+  padding: 25px 50px;
+}
+
+.botton-add {
+  display: inline-block;
+  padding: 21px 26px;
+  border-radius: 38px;
+}
+
+.alert-delete {
+  position: fixed;
+  left: 30%;
+  top: 50%;
+}
+
+.modal-delete {
+  position: fixed;
+  left: 30%;
+  top: 50%;
+}
+
+.modal-edit{
+  width: 50%;
+  position: fixed;
+  left: 20%;
+  top: 20%;
+}
+
+.lock {
+  /* Скрываем скроллбары */
+  overflow: hidden;
+
+}
+.lock .modal {
+  background: rgba(0,0,0,0.5);
+  display: block;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  overflow: auto;
+}
+
+
+
+
+
+
+
+.animate-show {
+  opacity: 1;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+
+  opacity: 0;
+
 }
