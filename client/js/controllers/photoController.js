@@ -68,6 +68,12 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'adminService', '$t
         });
         if (indexObj !== undefined) {
             $scope.images[indexObj].caption = $scope.activeImage.caption;
+
+            //
+
+                var json = angular.toJson($scope.images);
+            console.log(json);
+            adminService.setContents().update(json);
             $scope.modalEd = false;
             $("body").removeClass("lock");
             $(".substrate").removeClass("modal");

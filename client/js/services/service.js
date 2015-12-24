@@ -30,10 +30,17 @@ app.service('adminService', ['$resource', '$q', function ($resource, $q) {
         });
 
     };
+
     this.getPhoto = function(index){
         return info.then(function(contents){
             return contents[index].images;
         });
+    };
+
+
+    this.setContents = function(){
+
+        return $resource('resource/content.json', null, {'update': {method: 'PUT'}});
     };
 
 
