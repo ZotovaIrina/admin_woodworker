@@ -22,13 +22,14 @@
         </div>
     </div>
     <div class="media media-add">
-        <button class="btn btn-danger btn-circle btn-lg botton-add ">
+        <button class="btn btn-danger btn-circle btn-lg botton-add "
+                ng-click="modalAdd()">
             <span class="glyphicon glyphicon-plus"
                   aria-hidden="true">
             </span>
         </button>
     </div>
-    <div class="alert alert-warning alert-delete" role="alert" ng-if="alert">Фото удалено</div>
+    <div class="alert alert-delete" ng-class="alertCollor" role="alert" ng-if="alert">{{alertMessage}}</div>
 </div>
 
 
@@ -76,6 +77,31 @@
                 <button class="btn btn-info" type="button" ng-click="EditPhoto()">OK</button>
             </div>
         </div>
+
+        <!-- Modal window Add Photo-->
+
+        <div class="modal-content modal-edit animate-show" ng-show="modalA">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="modalClose()"><span>&times;</span></button>
+                <h4>Добавление нового фото на страницу</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-xs-6">
+                        <img id="model-add-photo-img" class="col-xs-12" ng-src="">
+                    </div>
+                    <div class="form-group col-xs-6">
+                        <h4>Описание:</h4>
+                        <input type="file" ng-file="activeImage">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" type="button" ng-click="modalClose()">Cancel</button>
+                <button class="btn btn-info" type="button" ng-click="addPhoto()">OK</button>
+            </div>
+        </div>
+
     </div>
 
 </div>

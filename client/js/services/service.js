@@ -40,7 +40,7 @@ app.service('adminService', ['$resource', '$q', function ($resource, $q) {
 
     this.setContents = function(){
 
-        return $resource('resource/content.json', null, {'update': {method: 'PUT'}});
+        return $resource('resource/content.json/data/content/:id', null, {'update': {method: 'PUT'}});
     };
 
 

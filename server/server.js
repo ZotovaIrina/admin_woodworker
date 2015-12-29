@@ -14,8 +14,7 @@ var server = app.listen(3000, function () {
     console.log('SuperServer has been started');
 });
 
-app.put('/resource/content.json', function(req, res){
-
+app.put('/resource/content.json/data/content/:id', function(req, res){
 
     res.json({
         success:true
