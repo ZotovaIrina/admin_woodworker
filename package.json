@@ -10,6 +10,7 @@
     "angular-route": "^1.4.8",
     "angular-ui-bootstrap": "^0.14.3",
     "angular-ui-router": "^0.2.15",
+    "angular-file-upload": "^2.2.0",
     "body-parser": "^1.14.2",
     "bootstrap": "^3.3.6",
     "browserify": "^12.0.1",
@@ -42,7 +43,8 @@
         "angular:angular",
         "angular-animate",
         "angular-ui-router",
-        "angular-resource"
+        "angular-resource",
+        "angular-file-upload"
       ]
     }
   },

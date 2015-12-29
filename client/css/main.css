@@ -4,7 +4,7 @@
 .jumbotron {
   margin: 0 auto;
   padding-top: 0;
-  height: 100px;
+  height: 13vh;
   background: url("../resource/bg-body.png");
   color: #FFD119;
 }
@@ -12,6 +12,11 @@
 .head-link, .head-link:hover {
   text-decoration: none;
   color: #FFD119;
+}
+
+#title {
+  font-size: 4rem;
+  text-align: center;
 }
 
 .container {
@@ -25,9 +30,18 @@
 
 .row-content {
   margin: 0 auto;
-  padding: 50px 0;
+  padding: 0;
   border-bottom: 1px ridge;
   min-height: 400px;
+}
+
+html {
+  overflow: hidden;
+}
+
+#content {
+  height: 87vh;
+  overflow: auto;
 }
 
 #sideMenu {
@@ -107,6 +121,16 @@
   position: fixed;
   left: 20%;
   top: 20%;
+}
+
+.modal-add {
+  width: 70%;
+  height: 60%;
+  position: fixed;
+  left: 10%;
+  top: 20%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .lock {

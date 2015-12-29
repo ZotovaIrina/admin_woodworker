@@ -73,6 +73,16 @@ $photoWidth: $mediaWidth - 30px;
   top: 20%;
 }
 
+.modal-add {
+  width: 70%;
+  height: 60%;
+  position: fixed;
+  left: 10%;
+  top: 20%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .lock {
   /* Скрываем скроллбары */
   overflow: hidden;

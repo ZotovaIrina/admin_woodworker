@@ -1,4 +1,4 @@
-var app = angular.module('admin_woodworker', ['ui.router', 'ngResource', 'ngAnimate']);
+var app = angular.module('admin_woodworker', ['ui.router', 'ngResource', 'ngAnimate', 'angularFileUpload']);
 
 app.config(['$stateProvider', '$urlRouterProvider',
     function ($stateProvider, $urlRouterProvider) {
