@@ -1,6 +1,27 @@
-
-
 #sideMenu {
-    background: $backcolor;
-
+    background: linear-gradient(to bottom, $yellow, #FFF);;
+    height: (100-$header-height);
+    padding: 2px;
 }
+
+.panel-group .panel+.panel {
+    margin-top: 2px;
+}
+
+.side-menu-h3 {
+    color: $brown;
+    font-size: 2rem;
+}
+
+a.list-group-item, button.list-group-item {
+    color: $brown;
+}
+
+title>.small, .panel-title>.small>a, .panel-title>a, .panel-title>small, .panel-title>small>a {
+    color: $brown;
+}
+
+.panel-body {
+    padding: 0;
+}
+

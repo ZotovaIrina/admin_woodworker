@@ -129,11 +129,10 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'adminService', '$t
     };
 
     var uploader = $scope.uploader = new FileUploader({
-        url: 'upload.php'
+        url: '/resource'
     });
 
     $scope.addPhoto = function () {         // add new photo
-
 
 
         // FILTERS

@@ -45,12 +45,36 @@ html {
 }
 
 #sideMenu {
-  background: #ffbf80;
+  background: linear-gradient(to bottom, #FFD119, #FFF);
+  height: 87vh;
+  padding: 2px;
+}
+
+.panel-group .panel + .panel {
+  margin-top: 2px;
+}
+
+.side-menu-h3 {
+  color: #241b18;
+  font-size: 2rem;
+}
+
+a.list-group-item, button.list-group-item {
+  color: #241b18;
+}
+
+title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > small, .panel-title > small > a {
+  color: #241b18;
+}
+
+.panel-body {
+  padding: 0;
 }
 
 .start-img {
   width: 100%;
   opacity: 0.1;
+  height: 87vh;
 }
 
 .mediaPhoto {
@@ -125,10 +149,23 @@ html {
 
 .modal-add {
   width: 70%;
-  height: 60%;
-  position: fixed;
-  left: 10%;
-  top: 20%;
+  max-width: 500px;
+  margin: 10vh auto;
+}
+
+.modal-add-footer {
+  text-align: left;
+}
+
+.modal-add-row {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+}
+
+.modal-body {
+  min-height: 0;
+  max-height: 50vh;
+  height: auto;
   overflow-y: auto;
   overflow-x: hidden;
 }

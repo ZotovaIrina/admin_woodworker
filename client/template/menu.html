@@ -1,8 +1,8 @@
-    <h2>Выберете раздел сайта:</h2>
+    <h3 class="side-menu-h3">Выберете раздел сайта:</h3>
 
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-        <div class="panel panel-default" ng-repeat="section in sections">
+        <div class="panel panel-warning" ng-repeat="section in sections">
             <div class="panel-heading" role="tab" id="heading-{{section}}">
                 <h4 class="panel-title">
                     <a role="button"
@@ -10,9 +10,9 @@
                        data-parent="#accordion"
                        data-target="#collapse-{{section}}"
                        aria-expanded="false"
-                       aria-controls="collapse-{{section}}">
-                        <p>{{contents[section].name}}</p>
-
+                       aria-controls="collapse-{{section}}"
+                       class="side-menu-p">
+                        {{contents[section].name}}
                     </a>
                 </h4>
             </div>
