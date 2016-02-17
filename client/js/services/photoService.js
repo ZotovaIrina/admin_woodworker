@@ -1,7 +1,7 @@
 var app = require("../app");
 
 
-app.service('adminService', ['$resource', '$q', function ($resource, $q) {
+app.service('photoService', ['$resource', '$q', function ($resource, $q) {
 
     var contentJson = function () {
         var promise = $resource('resource/content.json').get().$promise;

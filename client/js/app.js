@@ -28,7 +28,8 @@ app.config(['$stateProvider', '$urlRouterProvider',
                 url:'templateEditor/:id',
                 views: {
                     'content@': {
-                        templateUrl : 'template/templateEditor.html'
+                        templateUrl : 'template/templateEditor.html',
+                        controller: 'TextController'
                     }
                 }
             });

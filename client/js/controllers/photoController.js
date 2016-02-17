@@ -1,6 +1,6 @@
 var app = require("../app");
 
-app.controller('PhotoController', ['$scope', '$stateParams', 'adminService', '$timeout','FileUploader', function ($scope, $stateParams, adminService, $timeout, FileUploader) {
+app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$timeout','FileUploader', function ($scope, $stateParams, photoService, $timeout, FileUploader) {
 
     var id = $stateParams.id;
     $scope.src = "resource/photo/big/" + id + "/";
@@ -9,7 +9,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'adminService', '$t
     $scope.alertMessage = "";   // text message
     $scope.activeImage = {};        // work scope. With this data we work in modal window and it repeat active image in pages
 
-    adminService.getPhoto(id)
+    photoService.getPhoto(id)
         .then(function (contents) {
             $scope.images = contents;
         });
@@ -46,7 +46,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'adminService', '$t
             $scope.modalDel = false;
             $("body").removeClass("lock");
             $(".substrate").removeClass("modal");
-            adminService.setContents().update({id: id}, $scope.images).$promise
+            photoService.setContents().update({id: id}, $scope.images).$promise
                 .then(function (resourse) {
                     if (resourse.success) {
                         console.log("success");
@@ -91,7 +91,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'adminService', '$t
         if (indexObj !== undefined) {
             $scope.images[indexObj].caption = $scope.activeImage.caption;
 
-            adminService.setContents().update({id: id}, $scope.images).$promise     //send data on the server then get message from server success = true or not and show the message
+            photoService.setContents().update({id: id}, $scope.images).$promise     //send data on the server then get message from server success = true or not and show the message
                 .then(function (resourse) {
                     if (resourse.success) {
                         console.log("success");
