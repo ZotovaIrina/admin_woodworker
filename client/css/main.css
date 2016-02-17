@@ -137,7 +137,7 @@ title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > smal
 .modal-delete {
   position: fixed;
   left: 30%;
-  top: 50%;
+  top: 30%;
 }
 
 .modal-edit {

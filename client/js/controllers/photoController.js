@@ -28,6 +28,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'adminService', '$t
         $scope.modalA = false;
         $("body").removeClass("lock");
         $(".substrate").removeClass("modal");
+        uploader.clearQueue();
     };
 
 
