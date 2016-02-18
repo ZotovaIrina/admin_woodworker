@@ -42,6 +42,7 @@ html {
 #content {
   height: 87vh;
   overflow: auto;
+  padding: 2px;
 }
 
 #sideMenu {
