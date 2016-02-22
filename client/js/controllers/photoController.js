@@ -1,13 +1,15 @@
 var app = require("../app");
 
-app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$timeout','FileUploader', function ($scope, $stateParams, photoService, $timeout, FileUploader) {
+app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$timeout', 'FileUploader', function ($scope, $stateParams, photoService, $timeout, FileUploader) {
 
     var id = $stateParams.id;
     $scope.src = "resource/photo/big/" + id + "/";
 
     $scope.alert = false;       // message success or error delete, edit, add
     $scope.alertMessage = "";   // text message
-    $scope.activeImage = {};        // work scope. With this data we work in modal window and it repeat active image in pages
+    $scope.activeImage = {}; // work scope. With this data we work in modal window and it repeat active image in pages
+    $scope.alertCollor = "";
+
 
     photoService.getPhoto(id)
         .then(function (contents) {
@@ -53,19 +55,11 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
                         $scope.alert = true;
                         $scope.alertMessage = "Фото удалено";
                         $scope.alertCollor = "alert-warning";
-                        $timeout(function () {
-                            $scope.alert = false;
-                            $scope.alertCollor = "";
-                        }, 1500);
                     } else {
                         $scope.alert = true;
                         $scope.alertMessage = "Произошла ошибка";
                         console.log("error");
                         $scope.alertCollor = "alert-danger";
-                        $timeout(function () {
-                            $scope.alert = false;
-                            $scope.alertCollor = "";
-                        }, 1700);
                     }
                 });
         } else {
@@ -98,19 +92,11 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
                         $scope.alert = true;
                         $scope.alertMessage = "Изменения сохранены";
                         $scope.alertCollor = "alert-warning";
-                        $timeout(function () {
-                            $scope.alert = false;
-                            $scope.alertCollor = "";
-                        }, 1500);
                     } else {
                         $scope.alert = true;
                         $scope.alertMessage = "Произошла ошибка";
                         console.log("error");
                         $scope.alertCollor = "alert-danger";
-                        $timeout(function () {
-                            $scope.alert = false;
-                            $scope.alertCollor = "";
-                        }, 1700);
                     }
                 });
             $scope.modalEd = false;
@@ -140,7 +126,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
 
         uploader.filters.push({
             name: 'imageFilter',
-            fn: function(item /*{File|FileLikeObject}*/, options) {
+            fn: function (item /*{File|FileLikeObject}*/, options) {
                 var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
                 return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
             }
@@ -148,46 +134,43 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
 
         // CALLBACKS
 
-        uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
+        uploader.onWhenAddingFileFailed = function (item /*{File|FileLikeObject}*/, filter, options) {
             console.info('onWhenAddingFileFailed', item, filter, options);
         };
-        uploader.onAfterAddingFile = function(fileItem) {
+        uploader.onAfterAddingFile = function (fileItem) {
             console.info('onAfterAddingFile', fileItem);
         };
-        uploader.onAfterAddingAll = function(addedFileItems) {
+        uploader.onAfterAddingAll = function (addedFileItems) {
             console.info('onAfterAddingAll', addedFileItems);
         };
-        uploader.onBeforeUploadItem = function(item) {
+        uploader.onBeforeUploadItem = function (item) {
             console.info('onBeforeUploadItem', item);
         };
-        uploader.onProgressItem = function(fileItem, progress) {
+        uploader.onProgressItem = function (fileItem, progress) {
             console.info('onProgressItem', fileItem, progress);
         };
-        uploader.onProgressAll = function(progress) {
+        uploader.onProgressAll = function (progress) {
             console.info('onProgressAll', progress);
         };
-        uploader.onSuccessItem = function(fileItem, response, status, headers) {
+        uploader.onSuccessItem = function (fileItem, response, status, headers) {
             console.info('onSuccessItem', fileItem, response, status, headers);
         };
-        uploader.onErrorItem = function(fileItem, response, status, headers) {
+        uploader.onErrorItem = function (fileItem, response, status, headers) {
             console.info('onErrorItem', fileItem, response, status, headers);
         };
-        uploader.onCancelItem = function(fileItem, response, status, headers) {
+        uploader.onCancelItem = function (fileItem, response, status, headers) {
             console.info('onCancelItem', fileItem, response, status, headers);
         };
-        uploader.onCompleteItem = function(fileItem, response, status, headers) {
+        uploader.onCompleteItem = function (fileItem, response, status, headers) {
             console.info('onCompleteItem', fileItem, response, status, headers);
         };
-        uploader.onCompleteAll = function() {
+        uploader.onCompleteAll = function () {
             console.info('onCompleteAll');
         };
 
         console.info('uploader', uploader);
 
     };
-
-
-
 
 
 }]);

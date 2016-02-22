@@ -187,6 +187,10 @@ title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > smal
   overflow: auto;
 }
 
+.alert {
+  left: 50%;
+}
+
 .animate-show {
   opacity: 1;
 }

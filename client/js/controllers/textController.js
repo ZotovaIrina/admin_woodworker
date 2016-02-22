@@ -9,6 +9,7 @@ app.controller('TextController', ['$scope', '$stateParams', 'textService', funct
             $scope.orightml = response;
             //    console.log($scope.orightml);
         });
+
     $scope.sendTemplate = function () {
         console.log($scope.orightml);
         textService.setHtml(fileAddress)

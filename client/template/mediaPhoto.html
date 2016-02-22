@@ -1,4 +1,5 @@
 <div class="col-xs-12">
+
     <div class="media mediaPhoto" ng-repeat="image in images">
         <div class="media-top img-wrap img-rounded ">
             <img class="media-object media-photo-img-hide" orientable
@@ -29,6 +30,8 @@
             </span>
         </button>
     </div>
+
+
 
 </div>
 
@@ -157,7 +160,7 @@
 </div>
 
 
-<!-- Alert window window Delete Photo-->
-<div class="alert alert-delete" ng-class="alertCollor" role="alert" ng-if="alert">{{alertMessage}}</div>
+<!-- Alert window Delete Photo-->
+<alert-directive massage="alertMessage" color="alertCollor" show="alert"></alert-directive>
 
 
