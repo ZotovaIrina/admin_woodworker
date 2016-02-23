@@ -3,7 +3,7 @@ var app = require("../app");
 app.controller('TextController', ['$scope', '$stateParams', 'textService', function ($scope, $stateParams, textService) {
 
     var id = $stateParams.id;
-    var fileAddress = "resource/template/" + id + ".html";
+    var fileAddress = "resource/template/" + id + ".html?_=" + Date.now();
     textService.getHtml(fileAddress)
         .then(function (response) {
             $scope.orightml = response;

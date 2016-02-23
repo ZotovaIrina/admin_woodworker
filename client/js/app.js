@@ -16,19 +16,19 @@ app.config(['$stateProvider', '$urlRouterProvider',
                 }
             })
             .state('app.mediaPhoto', {
-                url:'mediaPhoto/:id',
+                url: 'mediaPhoto/:id',
                 views: {
                     'content@': {
-                        templateUrl : 'template/mediaPhoto.html',
-                        controller  : 'PhotoController'
+                        templateUrl: 'template/mediaPhoto.html',
+                        controller: 'PhotoController'
                     }
                 }
             })
             .state('app.templateEditor', {
-                url:'templateEditor/:id',
+                url: 'templateEditor/:id',
                 views: {
                     'content@': {
-                        templateUrl : 'template/templateEditor.html',
+                        templateUrl: 'template/templateEditor.html',
                         controller: 'TextController'
                     }
                 }

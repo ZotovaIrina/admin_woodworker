@@ -46,7 +46,7 @@ html {
 }
 
 #sideMenu {
-  background: linear-gradient(to bottom, #FFD119, #FFF);
+  background: linear-gradient(to bottom, #241b18, #73685D);
   height: 87vh;
   padding: 2px;
 }
@@ -56,7 +56,7 @@ html {
 }
 
 .side-menu-h3 {
-  color: #241b18;
+  color: #FFD119;
   font-size: 2rem;
 }
 
