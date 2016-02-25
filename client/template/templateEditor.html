@@ -1,2 +1,8 @@
-<html-textarea html="orightml"></html-textarea>
-<button type="submit" class="btn btn-primary" ng-click="sendTemplate()">Save</button>
+<html-textarea html="orightml"
+               is-changed="htmlIsChanged"></html-textarea>
+<button type="submit"
+        class="btn btn-primary"
+        ng-click="sendTemplate()"
+        ng-disabled="!htmlIsChanged">Save</button>
+
+<alert-directive massage="alertMessage" color="alertColor" show="alert"></alert-directive>

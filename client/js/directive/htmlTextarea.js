@@ -5,7 +5,10 @@ app.directive('htmlTextarea', function () {
 
         restrict: 'E',  //restricts the directive to a specific directive declaration style. E - Element name (default): <my-directive></my-directive>; A - Attribute (default): <div my-directive="exp"></div>C - Class: <div class="my-directive: exp;"></div> M - Comment: <!-- directive: my-directive exp -->
         scope: {
-            html: '=' //find attribute with name html and pass it in the $scope.html for controller and scope.html for link
+            //find attribute with name html and pass it in the $scope.html for controller and scope.html for link
+            html: '=',
+            isChanged: '='
+
         },
         replace: true,  // replace directive in DOM on the dom element in template. For this template should contain one wrap element. Default: false and you will see your directive in Dom and child of directive will be template.
         template: '<textarea>{{html}}</textarea>',
@@ -23,7 +26,9 @@ app.directive('htmlTextarea', function () {
 
                 editor.on('change', function (evt) {
                     scope.html = evt.editor.getData();
+                    scope.isChanged = true;
                     scope.$apply();
+
                 });
             }
 
