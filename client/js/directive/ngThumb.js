@@ -1,13 +1,13 @@
 var app = require("../app");
 
-app.directive('ngThumb', ['$window', function($window) {
+app.directive('ngThumb', ['$window', function ($window) {
     var helper = {
         support: !!($window.FileReader && $window.CanvasRenderingContext2D),
-        isFile: function(item) {
+        isFile: function (item) {
             return angular.isObject(item) && item instanceof $window.File;
         },
-        isImage: function(file) {
-            var type =  '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
+        isImage: function (file) {
+            var type = '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
             return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
         }
     };
@@ -15,7 +15,7 @@ app.directive('ngThumb', ['$window', function($window) {
     return {
         restrict: 'A',
         template: '<canvas/>',
-        link: function(scope, element, attributes) {
+        link: function (scope, element, attributes) {
             if (!helper.support) return;
 
             var params = scope.$eval(attributes.ngThumb);
@@ -36,10 +36,24 @@ app.directive('ngThumb', ['$window', function($window) {
             }
 
             function onLoadImage() {
-                var width = params.width || this.width / this.height * params.height;
-                var height = params.height || this.height / this.width * params.width;
-                canvas.attr({ width: width, height: height });
+
+                var width,
+                    height;
+                //this.width and this.height is a width and height of the image. params.height is a height which specified in html template
+                // if vertical image
+                if (this.height > this.width) {
+                    width = params.width || this.width / this.height * params.height;
+                    height = params.height || this.height / this.width * params.width;
+                } else {
+                    //if horizontal image
+                    params.height = params.height*2/3;
+                    width = params.width || this.width / this.height * params.height;
+                    height = params.height || this.height / this.width * params.width;
+                }
+                console.log(" this.width  this.height", this.width, this.height);
+                canvas.attr({width: width, height: height});
                 canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
+
             }
         }
     };

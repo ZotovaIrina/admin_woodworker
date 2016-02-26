@@ -104,7 +104,7 @@
                                 <!--auto height-->
                                 <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
                                 <!--auto width-->
-                                <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 200 }"></div>
+                                <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 250 }"></div>
                                 <!--fixed width and height -->
                                 <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
                                 <!--<p>{{ item.file.size/1024/1024|number:2 }} MB</p> -->
@@ -116,7 +116,7 @@
 
                             <textarea class="form-control"
                                       rows="3"
-                                      ng-model="item.caption">
+                                      ng-model="item.fromData">
                             </textarea>
                             </div>
 
@@ -135,7 +135,6 @@
             </div>
             <div class="modal-footer">
 
-<button ng-click="testFunction()">Test</button>
                 <h4 class="modal-add-footer">Выберете файл</h4>
                 <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
                 <input type="file"

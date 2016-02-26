@@ -120,7 +120,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
     });
 
     $scope.testFunction = function (){
-        console.log (uploader.queue.file[0]);
+        console.log (uploader.queue);
     };
 
 
