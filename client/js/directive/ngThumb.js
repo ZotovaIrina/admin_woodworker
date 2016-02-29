@@ -39,18 +39,20 @@ app.directive('ngThumb', ['$window', function ($window) {
 
                 var width,
                     height;
+                width = params.width || this.width / this.height * params.height;
+                height = params.height || this.height / this.width * params.width;
                 //this.width and this.height is a width and height of the image. params.height is a height which specified in html template
                 // if vertical image
-                if (this.height > this.width) {
-                    width = params.width || this.width / this.height * params.height;
-                    height = params.height || this.height / this.width * params.width;
-                } else {
-                    //if horizontal image
-                    params.height = params.height*2/3;
-                    width = params.width || this.width / this.height * params.height;
-                    height = params.height || this.height / this.width * params.width;
-                }
-                console.log(" this.width  this.height", this.width, this.height);
+                //if (this.height > this.width) {
+                //    width = params.width || this.width / this.height * params.height;
+                //    height = params.height || this.height / this.width * params.width;
+                //    scope.flag = true;
+                //} else {
+                //    //if horizontal image
+                //    params.height = params.height * 2 / 3;
+                //    width = params.width || this.width / this.height * params.height;
+                //    height = params.height || this.height / this.width * params.width;
+                //}
                 canvas.attr({width: width, height: height});
                 canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
 

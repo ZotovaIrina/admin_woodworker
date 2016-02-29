@@ -31,7 +31,7 @@ $photoWidth: $mediaWidth - 30px;
 
 .media-photo-img-hide {
   display: block;
-  background: url("../resource/camera.png");
+  background-image: url("../resource/camera.png");
   opacity: 0.1;
   width: $photoWidth;
 }
@@ -74,9 +74,12 @@ $photoWidth: $mediaWidth - 30px;
 }
 
 .modal-add {
-  width: 70%;
-  max-width: 500px;
+  width: 75%;
+  max-width: 700px;
   margin: 10vh auto;
+  @media screen and (max-width: $screen-small) {
+    width: 90%;
+  }
 }
 
 .modal-add-footer {
@@ -84,8 +87,8 @@ $photoWidth: $mediaWidth - 30px;
 }
 
 .modal-add-row {
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 5px;
+  //border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
 }
 
 .modal-body{
@@ -117,12 +120,51 @@ $photoWidth: $mediaWidth - 30px;
   left: 50%;
 }
 
+.imagePreview {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  margin-bottom: -5px;
+  @media screen and (max-width: $screen-small) {
+    display: block;
+  }
+}
+
+.imageComment {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  width: 300px;
+  @media screen and (max-width: $screen-small) {
+    display: block;
+    margin-left: 0;
+    margin-top: 5px;
+    width: inherit;
+  }
+}
+
+.imageButton {
+  margin-top: 7px;
+}
+
+canvas {
+  background-color: #f3f3f3;
+  -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+  -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+  box-shadow: 3px 3px 3px 0 #e3e3e3;
+  border: 1px solid #c3c3c3;
+  margin: 0;
+  width: 200px;
+}
 
 
 
 
 
 
+
+
+//animation for open modal window
 .animate-show {
   opacity: 1;
 }

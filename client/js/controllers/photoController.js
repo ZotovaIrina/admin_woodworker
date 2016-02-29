@@ -119,12 +119,6 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         url: '/resource'
     });
 
-    $scope.testFunction = function (){
-        console.log (uploader.queue);
-    };
-
-
-
 
 
 

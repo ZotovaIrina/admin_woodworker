@@ -106,7 +106,7 @@ title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > smal
 
 .media-photo-img-hide {
   display: block;
-  background: url("../resource/camera.png");
+  background-image: url("../resource/camera.png");
   opacity: 0.1;
   width: 145px;
 }
@@ -149,9 +149,14 @@ title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > smal
 }
 
 .modal-add {
-  width: 70%;
-  max-width: 500px;
+  width: 75%;
+  max-width: 700px;
   margin: 10vh auto;
+}
+@media screen and (max-width: 720px) {
+  .modal-add {
+    width: 90%;
+  }
 }
 
 .modal-add-footer {
@@ -159,8 +164,7 @@ title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > smal
 }
 
 .modal-add-row {
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 5px;
+  margin-bottom: 20px;
 }
 
 .modal-body {
@@ -189,6 +193,47 @@ title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > smal
 
 .alert {
   left: 50%;
+}
+
+.imagePreview {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
+  margin-bottom: -5px;
+}
+@media screen and (max-width: 720px) {
+  .imagePreview {
+    display: block;
+  }
+}
+
+.imageComment {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  width: 300px;
+}
+@media screen and (max-width: 720px) {
+  .imageComment {
+    display: block;
+    margin-left: 0;
+    margin-top: 5px;
+    width: inherit;
+  }
+}
+
+.imageButton {
+  margin-top: 7px;
+}
+
+canvas {
+  background-color: #f3f3f3;
+  -webkit-box-shadow: 3px 3px 3px 0 #e3e3e3;
+  -moz-box-shadow: 3px 3px 3px 0 #e3e3e3;
+  box-shadow: 3px 3px 3px 0 #e3e3e3;
+  border: 1px solid #c3c3c3;
+  margin: 0;
+  width: 200px;
 }
 
 .animate-show {
