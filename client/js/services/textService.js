@@ -1,7 +1,8 @@
 var app = require("../app");
 
 
-app.service('textService', ['$http', '$q', function ($http, $q) {
+
+app.service('textService', ['$http', '$q', function ($http) {
 
     this.getHtml = function (fileAddress) {
 

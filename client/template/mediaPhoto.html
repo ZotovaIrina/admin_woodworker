@@ -2,8 +2,11 @@
 
     <div class="media mediaPhoto" ng-repeat="image in images">
         <div class="media-top img-wrap img-rounded ">
-            <img class="media-object media-photo-img-hide" orientable
-                 ng-src="{{src}}{{image.name}}">
+            <!--<img class="media-object media-photo-img-hide" orientable-->
+                 <!--ng-src="{{src}}{{image.name}}">-->
+            <img class="media-object media-photo-img-hide"
+                 data-ng-src="data:image/JPEG;base64,{{image.src}}"
+                 orientable>
         </div>
         <div class="media-body ">
             <p class="media-caption">{{image.caption}}</p>
@@ -107,10 +110,10 @@
                                 </div>
                                 <div class="imageButton">
                                     <button type="button"
-                                        class="btn btn-danger btn-xs"
-                                        ng-click="item.remove()">
-                                    <span class="glyphicon glyphicon-trash"></span> Remove
-                                </button>
+                                            class="btn btn-danger btn-xs"
+                                            ng-click="item.remove()">
+                                        <span class="glyphicon glyphicon-trash"></span> Remove
+                                    </button>
                                 </div>
                             </div>
                         </div>

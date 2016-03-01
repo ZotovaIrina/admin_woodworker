@@ -1,9 +1,11 @@
 var app = require("../app");
 
-app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$timeout', 'FileUploader', function ($scope, $stateParams, photoService, $timeout, FileUploader) {
+app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$timeout', 'FileUploader', 'baseResourceURL', function ($scope, $stateParams, photoService, $timeout, FileUploader, baseResourceURL) {
 
+    // Photo for which page controller should get
     var id = $stateParams.id;
-    $scope.src = "resource/photo/big/" + id + "/";
+    //string for ng-src="{{src}}{{image.name}}"
+   // $scope.src = baseResourceURL + "/photo/big/" + id + "/";
 
     $scope.alert = false;       // message success or error delete, edit, add
     $scope.alertMessage = "";   // text message
@@ -13,7 +15,26 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
 
     photoService.getPhoto(id)
         .then(function (contents) {
+            //array objects with image.name and image.caption
             $scope.images = contents;
+        },
+        function (err) {
+            console.log("Error", err);
+        })
+        .then(function () {
+            angular.forEach($scope.images, function (image) {
+                var name = image.name;
+                photoService.getPhotoSrc(id, name)
+                    .then(function (contents) {
+                        image.src = contents;
+                    },
+                    function (err) {
+                        console.log("Error", err);
+                    })
+                    .then(function() {
+                        console.log($scope.images);
+                    });
+            });
         });
 
 
@@ -118,11 +139,6 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
     var uploader = $scope.uploader = new FileUploader({
         url: '/resource'
     });
-
-
-
-
-
 
 
 }]);

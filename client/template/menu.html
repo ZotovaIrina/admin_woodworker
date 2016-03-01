@@ -1,3 +1,4 @@
+<div id="mainMenu">
     <h3 class="side-menu-h3">Выберете раздел сайта:</h3>
 
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -10,7 +11,7 @@
                        data-parent="#accordion"
                        data-target="#collapse-{{section}}"
                        aria-expanded="false"
-                       aria-controls="collapse-{{section}}"">
+                       aria-controls="collapse-{{section}}">
                         {{contents[section].name}}
                     </a>
                 </h4>
@@ -31,3 +32,22 @@
         </div>
 
     </div>
+</div>
+
+
+<div id="loginMenu">
+    <h3 class="side-menu-h3">Для соединения с сервером введите данные:</h3>
+
+    <div class="bg-warning">
+        <label for="loginUserName">
+            Имя пользователя:</label>
+        <input id="loginUserName">
+    </div>
+    <div class="bg-warning">
+        <label for="loginUserPassword">
+            Пароль:</label>
+        <input id="loginUserPassword">
+    </div>
+    <button class="btn btn-block btn-warning">OK</button>
+</div>
+
