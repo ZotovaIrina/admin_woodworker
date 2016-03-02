@@ -94,17 +94,17 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         $scope.modalEd = true;
     };
 
-    $scope.$watch('activeImage.caption', function() {
-        if($scope.activeImage.caption !== image.caption && captionWatchToggle) {
-
-            $scope.captionIsChanged = true;
-            console.log("if", captionWatchToggle);
-        } else if (!captionWatchToggle){
-            captionWatchToggle = true;
-            console.log("else if", captionWatchToggle);
-        }
-
-    });
+    //$scope.$watch('activeImage.caption', function() {
+    //    if($scope.activeImage.caption !== image.caption && captionWatchToggle) {
+    //
+    //        $scope.captionIsChanged = true;
+    //        console.log("if", captionWatchToggle);
+    //    } else if (!captionWatchToggle){
+    //        captionWatchToggle = true;
+    //        console.log("else if", captionWatchToggle);
+    //    }
+    //
+    //});
 
     //edit photo's caption set
     $scope.EditPhoto = function () {

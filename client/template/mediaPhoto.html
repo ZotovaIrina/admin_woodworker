@@ -1,14 +1,15 @@
 <div class="col-xs-12">
 
     <div class="media mediaPhoto" ng-repeat="image in images">
-        <div class="media-top img-wrap img-rounded ">
+        <div class="media-top img-wrap img-rounded "
+             data-toggle="tooltip"
+             data-placement="bottom"
+             title="{{image.error ? 'Не найдено' : ('Фото '+image.name)}}"
+             tooltip>
             <img class="media-object media-photo-img-hide"
                  ng-src="{{src}}{{image.name}}"
                  orientable
-                 error-src
-                 data-toggle="tooltip"
-                 data-placement="bottom"
-                 title="Фото {{image.name}}">
+                 error-src="image">
         </div>
         <div class="media-body ">
             <p class="media-caption">{{image.caption}}</p>
@@ -153,4 +154,3 @@
 
 <!-- Alert window-->
 <alert-directive massage="alertMessage" color="alertColor" show="alert"></alert-directive>
-
