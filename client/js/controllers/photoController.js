@@ -4,13 +4,17 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
 
     // Photo for which page controller should get
     var id = $stateParams.id;
+
+    //var for ng-disabled in edit window
+    var captionWatchToggle = false;
     //string for ng-src="{{src}}{{image.name}}"
-   // $scope.src = baseResourceURL + "/photo/big/" + id + "/";
+    $scope.src = baseResourceURL + "/photo/big/" + id + "/";
 
     $scope.alert = false;       // message success or error delete, edit, add
     $scope.alertMessage = "";   // text message
     $scope.activeImage = {}; // work scope. With this data we work in modal window and it repeat active image in pages
     $scope.alertCollor = "";
+
 
 
     photoService.getPhoto(id)
@@ -20,42 +24,32 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         },
         function (err) {
             console.log("Error", err);
-        })
-        .then(function () {
-            angular.forEach($scope.images, function (image) {
-                var name = image.name;
-                photoService.getPhotoSrc(id, name)
-                    .then(function (contents) {
-                        image.src = contents;
-                    },
-                    function (err) {
-                        console.log("Error", err);
-                    })
-                    .then(function() {
-                        console.log($scope.images);
-                    });
-            });
         });
 
 
-    $scope.modalDelete = function (image) {            //open modal delete window
+
+    //open modal delete window
+    $scope.modalDelete = function (image) {
         $scope.activeImage = image;
         $("body").addClass("lock");
         $(".substrate").addClass("modal");
         $scope.modalDel = true;
     };
 
-    $scope.modalClose = function () {       //close modal window
+    //close modal window
+    $scope.modalClose = function () {
         $scope.modalDel = false;
         $scope.modalEd = false;
         $scope.modalA = false;
         $("body").removeClass("lock");
         $(".substrate").removeClass("modal");
         uploader.clearQueue();
+        captionWatchToggle = false;
     };
 
 
-    $scope.deletePhoto = function () {         // delete photo
+    // delete photo
+    $scope.deletePhoto = function () {
         var name = $scope.activeImage.name;
         var indexObj;
         angular.forEach($scope.images, function (image, key) {
@@ -88,14 +82,32 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         }
     };
 
-    $scope.modalEdit = function (image) {            //open modal edit window
+    //open modal edit window and control window
+    $scope.modalEdit = function (image) {
         $scope.activeImage = angular.copy(image);
+        captionWatchToggle = false;
+        console.log("update image.caption");
+        console.log("function", captionWatchToggle);
+        $scope.captionIsChanged = false;
         $("body").addClass("lock");
         $(".substrate").addClass("modal");
         $scope.modalEd = true;
     };
 
-    $scope.EditPhoto = function () {          //edit photo's caption
+    $scope.$watch('activeImage.caption', function() {
+        if($scope.activeImage.caption !== image.caption && captionWatchToggle) {
+
+            $scope.captionIsChanged = true;
+            console.log("if", captionWatchToggle);
+        } else if (!captionWatchToggle){
+            captionWatchToggle = true;
+            console.log("else if", captionWatchToggle);
+        }
+
+    });
+
+    //edit photo's caption set
+    $scope.EditPhoto = function () {
         var indexObj;
         var name = $scope.activeImage.name;
         angular.forEach($scope.images, function (image, key) {
@@ -105,14 +117,15 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         });
         if (indexObj !== undefined) {
             $scope.images[indexObj].caption = $scope.activeImage.caption;
-
-            photoService.setContents().update({id: id}, $scope.images).$promise     //send data on the server then get message from server success = true or not and show the message
+            //send data on the server then get message from server success = true or not and show the message
+            photoService.setContents().update({id: id}, $scope.images).$promise
                 .then(function (resourse) {
                     if (resourse.success) {
                         console.log("success");
                         $scope.alert = true;
                         $scope.alertMessage = "Изменения сохранены";
                         $scope.alertColor = "alert-success";
+
                     } else {
                         $scope.alert = true;
                         $scope.alertMessage = "Произошла ошибка";
@@ -126,10 +139,12 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         } else {
             console.log("Элемент не найден");
         }
+        captionWatchToggle = false;
     };
 
 
-    $scope.modalAdd = function () {            //open modal add window
+    //open modal add window
+    $scope.modalAdd = function () {
         $scope.activeImage = {"1": 1};
         $("body").addClass("lock");
         $(".substrate").addClass("modal");

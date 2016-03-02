@@ -44,14 +44,6 @@ app.service('photoService', ['$resource', '$q', '$http', 'baseResourceURL', func
         });
     };
 
-    //get photo
-    this.getPhotoSrc = function(id, name){
-        return $http.get(baseResourceURL + "/photo/big/" + id + "/" + name)
-            .then(function(response){
-                return response.data;
-            });
-    };
-
 
     this.setContents = function(){
 

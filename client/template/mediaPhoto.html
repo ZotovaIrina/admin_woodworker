@@ -2,11 +2,13 @@
 
     <div class="media mediaPhoto" ng-repeat="image in images">
         <div class="media-top img-wrap img-rounded ">
-            <!--<img class="media-object media-photo-img-hide" orientable-->
-                 <!--ng-src="{{src}}{{image.name}}">-->
             <img class="media-object media-photo-img-hide"
-                 data-ng-src="data:image/JPEG;base64,{{image.src}}"
-                 orientable>
+                 ng-src="{{src}}{{image.name}}"
+                 orientable
+                 error-src
+                 data-toggle="tooltip"
+                 data-placement="bottom"
+                 title="Фото {{image.name}}">
         </div>
         <div class="media-body ">
             <p class="media-caption">{{image.caption}}</p>
@@ -80,7 +82,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default" type="button" ng-click="modalClose()">Cancel</button>
-                <button class="btn btn-info" type="button" ng-click="EditPhoto()">OK</button>
+                <button class="btn btn-info" type="button" ng-click="EditPhoto()" ng-disabled="!captionIsChanged">OK</button>
             </div>
         </div>
 
@@ -151,6 +153,4 @@
 
 <!-- Alert window-->
 <alert-directive massage="alertMessage" color="alertColor" show="alert"></alert-directive>
-
-
 
