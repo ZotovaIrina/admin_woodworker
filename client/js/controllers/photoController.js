@@ -5,8 +5,6 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
     // Photo for which page controller should get
     var id = $stateParams.id;
 
-    //var for ng-disabled in edit window
-    var captionWatchToggle = false;
     //string for ng-src="{{src}}{{image.name}}"
     $scope.src = baseResourceURL + "/photo/big/" + id + "/";
 
@@ -14,7 +12,6 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
     $scope.alertMessage = "";   // text message
     $scope.activeImage = {}; // work scope. With this data we work in modal window and it repeat active image in pages
     $scope.alertCollor = "";
-
 
 
     photoService.getPhoto(id)
@@ -25,7 +22,6 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         function (err) {
             console.log("Error", err);
         });
-
 
 
     //open modal delete window
@@ -41,10 +37,10 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         $scope.modalDel = false;
         $scope.modalEd = false;
         $scope.modalA = false;
+        $scope.activeImage = {};
         $("body").removeClass("lock");
         $(".substrate").removeClass("modal");
         uploader.clearQueue();
-        captionWatchToggle = false;
     };
 
 
@@ -70,6 +66,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
                         $scope.alert = true;
                         $scope.alertMessage = "Фото удалено";
                         $scope.alertCollor = "alert-success";
+
                     } else {
                         $scope.alert = true;
                         $scope.alertMessage = "Произошла ошибка";
@@ -79,32 +76,30 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
                 });
         } else {
             console.log("Элемент не найден");
+            $scope.activeImage = {};
         }
     };
 
     //open modal edit window and control window
     $scope.modalEdit = function (image) {
         $scope.activeImage = angular.copy(image);
-        captionWatchToggle = false;
-        console.log("update image.caption");
-        console.log("function", captionWatchToggle);
         $scope.captionIsChanged = false;
         $("body").addClass("lock");
         $(".substrate").addClass("modal");
         $scope.modalEd = true;
     };
 
-    //$scope.$watch('activeImage.caption', function() {
-    //    if($scope.activeImage.caption !== image.caption && captionWatchToggle) {
-    //
-    //        $scope.captionIsChanged = true;
-    //        console.log("if", captionWatchToggle);
-    //    } else if (!captionWatchToggle){
-    //        captionWatchToggle = true;
-    //        console.log("else if", captionWatchToggle);
-    //    }
-    //
-    //});
+    $scope.$watch('activeImage.caption', function (newValue, oldValue) {
+        console.log('newValue: ' + newValue + ', oldValue: ' + oldValue);
+        if (oldValue) {
+            console.log("change");
+            $scope.captionIsChanged = true;
+            return;
+        }
+        console.log("not change");
+
+
+    });
 
     //edit photo's caption set
     $scope.EditPhoto = function () {
@@ -139,7 +134,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         } else {
             console.log("Элемент не найден");
         }
-        captionWatchToggle = false;
+        $scope.activeImage = {};
     };
 
 
