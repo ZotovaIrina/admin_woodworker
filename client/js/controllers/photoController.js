@@ -11,7 +11,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
     $scope.alert = false;       // message success or error delete, edit, add
     $scope.alertMessage = "";   // text message
     $scope.activeImage = {}; // work scope. With this data we work in modal window and it repeat active image in pages
-    $scope.alertCollor = "";
+    $scope.alertColor = "";
 
 
     photoService.getPhoto(id)
@@ -34,14 +34,32 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
 
     //close modal window
     $scope.modalClose = function () {
+        $scope.modalA = false;
         $scope.modalDel = false;
         $scope.modalEd = false;
-        $scope.modalA = false;
         $scope.activeImage = {};
         $("body").removeClass("lock");
         $(".substrate").removeClass("modal");
-        uploader.clearQueue();
     };
+
+//local function for set data in content.json
+    function ApplyNewContent (textMessageSuccess) {
+        photoService.setContents().update({id: id}, $scope.images).$promise
+            .then(function (resourse) {
+                if (resourse.success) {
+                    console.log("success");
+                    $scope.alert = true;
+                    $scope.alertMessage = textMessageSuccess;
+                    $scope.alertColor = "alert-success";
+
+                } else {
+                    $scope.alert = true;
+                    $scope.alertMessage = "Произошла ошибка";
+                    console.log("error");
+                    $scope.alertColor = "alert-danger";
+                }
+            });
+    }
 
 
     // delete photo
@@ -55,29 +73,11 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         });
         if (indexObj !== undefined) {
             $scope.images.splice(indexObj, 1);
-
-            $scope.modalDel = false;
-            $("body").removeClass("lock");
-            $(".substrate").removeClass("modal");
-            photoService.setContents().update({id: id}, $scope.images).$promise
-                .then(function (resourse) {
-                    if (resourse.success) {
-                        console.log("success");
-                        $scope.alert = true;
-                        $scope.alertMessage = "Фото удалено";
-                        $scope.alertCollor = "alert-success";
-
-                    } else {
-                        $scope.alert = true;
-                        $scope.alertMessage = "Произошла ошибка";
-                        console.log("error");
-                        $scope.alertCollor = "alert-danger";
-                    }
-                });
+            ApplyNewContent("Фото удалено");
         } else {
             console.log("Элемент не найден");
-            $scope.activeImage = {};
         }
+        $scope.modalClose();
     };
 
     //open modal edit window and control window
@@ -89,16 +89,11 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         $scope.modalEd = true;
     };
 
+    //watch canging in $scope.activeimage in order to disabled OK button
     $scope.$watch('activeImage.caption', function (newValue, oldValue) {
-        console.log('newValue: ' + newValue + ', oldValue: ' + oldValue);
         if (oldValue) {
-            console.log("change");
             $scope.captionIsChanged = true;
-            return;
         }
-        console.log("not change");
-
-
     });
 
     //edit photo's caption set
@@ -113,34 +108,16 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         if (indexObj !== undefined) {
             $scope.images[indexObj].caption = $scope.activeImage.caption;
             //send data on the server then get message from server success = true or not and show the message
-            photoService.setContents().update({id: id}, $scope.images).$promise
-                .then(function (resourse) {
-                    if (resourse.success) {
-                        console.log("success");
-                        $scope.alert = true;
-                        $scope.alertMessage = "Изменения сохранены";
-                        $scope.alertColor = "alert-success";
-
-                    } else {
-                        $scope.alert = true;
-                        $scope.alertMessage = "Произошла ошибка";
-                        console.log("error");
-                        $scope.alertColor = "alert-danger";
-                    }
-                });
-            $scope.modalEd = false;
-            $("body").removeClass("lock");
-            $(".substrate").removeClass("modal");
+            ApplyNewContent("Изменения сохранены");
         } else {
             console.log("Элемент не найден");
         }
-        $scope.activeImage = {};
+        $scope.modalClose();
     };
 
 
     //open modal add window
     $scope.modalAdd = function () {
-        $scope.activeImage = {"1": 1};
         $("body").addClass("lock");
         $(".substrate").addClass("modal");
         $scope.modalA = true;
@@ -149,6 +126,21 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
     var uploader = $scope.uploader = new FileUploader({
         url: '/resource'
     });
+
+    $scope.AddPhoto = function () {
+        angular.forEach(uploader.queue, function (item, key) {
+            var img = {};
+            img.name = item.file.name;
+            img.caption = item.caption;
+            $scope.images.push(img);
+        });
+        uploader.uploadAll();
+        //set data in content.json
+        ApplyNewContent("Фото успешно добавлено");
+        $scope.modalClose();
+
+        uploader.clearQueue();
+    };
 
 
 }]);

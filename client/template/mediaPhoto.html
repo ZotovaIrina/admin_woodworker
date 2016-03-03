@@ -108,7 +108,7 @@
                                     <p>Описание для файла {{ item.file.name }}:</p>
                                     <textarea class="form-control"
                                               rows="3"
-                                              ng-model="item.fromData">
+                                              ng-model="item.caption">
                                      </textarea>
                                 </div>
                                 <div class="imageButton">
@@ -140,8 +140,8 @@
                 </button>
                 <button class="btn btn-info"
                         type="button"
-                        ng-click="uploader.uploadAll()"
-                        ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                        ng-click="AddPhoto()"
+                        ng-disabled="uploader.queue.length == 0">
                     OK
                 </button>
             </div>
