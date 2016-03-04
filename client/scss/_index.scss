@@ -1,3 +1,4 @@
+$baseResourceURL: "http://localhost:3000/resource";
 $yellow: #FFD119;
 $brown: #241b18;
 $backcolor: #ffbf80;
@@ -9,7 +10,7 @@ $screen-large: 940px;
   margin: 0 auto;
   padding-top: 0;
   height: $header-height;
-  background: url("../resource/bg-body.png");;
+  background: url($baseResourceURL + "/bg-body.png");;
   color: $yellow;
 }
 
@@ -19,8 +20,10 @@ $screen-large: 940px;
 }
 
 #title {
-  font-size: 4rem;
+  font-size: 3.8rem;
   text-align: center;
+  margin-top: 38px;
+  margin-bottom: 0;
 }
 
 .container {

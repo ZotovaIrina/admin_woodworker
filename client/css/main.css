@@ -5,7 +5,7 @@
   margin: 0 auto;
   padding-top: 0;
   height: 13vh;
-  background: url("../resource/bg-body.png");
+  background: url("http://localhost:3000/resource/bg-body.png");
   color: #FFD119;
 }
 
@@ -15,8 +15,10 @@
 }
 
 #title {
-  font-size: 4rem;
+  font-size: 3.8rem;
   text-align: center;
+  margin-top: 38px;
+  margin-bottom: 0;
 }
 
 .container {
@@ -72,10 +74,26 @@ title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > smal
   padding: 0;
 }
 
-#loginMenu {
+#login-menu {
   display: block;
+  width: 100%;
   position: absolute;
   bottom: 10px;
+  padding: 3px;
+}
+
+.login-menu-block {
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 3px;
+}
+
+.login-menu-label {
+  width: 100%;
+}
+
+.login-menu-input {
+  width: 100%;
 }
 
 .start-img {
