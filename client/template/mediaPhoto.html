@@ -7,6 +7,7 @@
              title="{{image.error ? 'Не найдено' : ('Фото '+image.name)}}"
              tooltip>
             <img class="media-object media-photo-img-hide"
+                 id="media-photo-{{image.name}}"
                  ng-src="{{src}}{{image.name}}"
                  orientable
                  error-src="image">
@@ -155,3 +156,4 @@
 <!-- Alert window-->
 <alert-directive massage="alertMessage" color="alertColor" show="alert"></alert-directive>
 
+<div id="loadingDiv" ng-if="loadingShow"><img ng-src="{{loadingSrc}}" id="loadingGif"></div>

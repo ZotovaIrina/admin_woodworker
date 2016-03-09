@@ -210,8 +210,6 @@ title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > smal
   background: rgba(0, 0, 0, 0.5);
   display: block;
   position: fixed;
-  bottom: 0;
-  left: 0;
   top: 0;
   right: 0;
   overflow: auto;
@@ -260,6 +258,23 @@ canvas {
   border: 1px solid #c3c3c3;
   margin: 0;
   width: 200px;
+}
+
+#loadingDiv {
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+#loadingGif {
+  display: block;
+  position: fixed;
+  top: 45%;
+  right: 45%;
 }
 
 .animate-show {

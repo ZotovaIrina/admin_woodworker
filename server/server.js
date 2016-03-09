@@ -23,6 +23,13 @@ app.put('/resource/content.json/data/content/:id', function (req, res) {
     });
     console.log(req.body);
 });
+app.put('/resource/photo', function (req, res) {
+
+    res.json({
+        success: true
+    });
+    console.log(req.body);
+});
 
 app.put('resource/template/room.html', function (req, res) {
 

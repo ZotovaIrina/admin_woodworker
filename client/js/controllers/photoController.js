@@ -12,6 +12,8 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
     $scope.alertMessage = "";   // text message
     $scope.activeImage = {}; // work scope. With this data we work in modal window and it repeat active image in pages
     $scope.alertColor = "";
+    $scope.loadingSrc = baseResourceURL + "/712.gif";
+    $scope.loadingShow = false;
 
 
     photoService.getPhoto(id)
@@ -43,8 +45,8 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
     };
 
 //local function for set data in content.json
-    function ApplyNewContent (textMessageSuccess) {
-        photoService.setContents().update({id: id}, $scope.images).$promise
+    function ApplyNewContent(data, textMessageSuccess) {
+        photoService.setContents().update({id: id}, data).$promise
             .then(function (resourse) {
                 if (resourse.success) {
                     console.log("success");
@@ -73,7 +75,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         });
         if (indexObj !== undefined) {
             $scope.images.splice(indexObj, 1);
-            ApplyNewContent("Фото удалено");
+            ApplyNewContent($scope.images, "Фото удалено");
         } else {
             console.log("Элемент не найден");
         }
@@ -108,7 +110,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         if (indexObj !== undefined) {
             $scope.images[indexObj].caption = $scope.activeImage.caption;
             //send data on the server then get message from server success = true or not and show the message
-            ApplyNewContent("Изменения сохранены");
+            ApplyNewContent($scope.images, "Изменения сохранены");
         } else {
             console.log("Элемент не найден");
         }
@@ -124,19 +126,46 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
     };
 
     var uploader = $scope.uploader = new FileUploader({
-        url: '/resource'
+        url: '/resource/photo'
     });
 
+
     $scope.AddPhoto = function () {
+        var newArray = angular.copy($scope.images);
         angular.forEach(uploader.queue, function (item, key) {
             var img = {};
             img.name = item.file.name;
             img.caption = item.caption;
-            $scope.images.push(img);
+            newArray.push(img);
         });
+        $scope.loadingShow = true;
         uploader.uploadAll();
+        photoService.setContents().update({id: id}, newArray).$promise
+            .then(function (resourse) {
+
+                if (resourse.success) {
+                    console.log("success");
+                    $scope.alert = true;
+                    $scope.alertMessage = "Фото успешно добавлено";
+                    $scope.alertColor = "alert-success";
+
+                }
+            })
+            .then(function () {
+                $scope.loadingShow = false;
+                console.log("get new data");
+                //FixMe: download data from server
+               $scope.images = angular.copy(newArray);
+            })
+            .catch(function () {
+                $scope.alert = true;
+                $scope.alertMessage = "Произошла ошибка сохранения данных";
+                console.log("error");
+                $scope.alertColor = "alert-danger";
+            });
         //set data in content.json
-        ApplyNewContent("Фото успешно добавлено");
+        //       ApplyNewContent(newArray, "Фото успешно добавлено", UpdateNewImage ());
+
         $scope.modalClose();
 
         uploader.clearQueue();
