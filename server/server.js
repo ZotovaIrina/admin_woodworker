@@ -17,7 +17,6 @@ var server = app.listen(3000, function () {
 });
 
 app.put('/resource/content.json/data/content/:id', function (req, res) {
-
     res.json({
         success: true
     });
@@ -31,12 +30,17 @@ app.put('/resource/photo', function (req, res) {
     console.log(req.body);
 });
 
-app.put('resource/template/room.html', function (req, res) {
+app.put('/resource/template/room.html', function (req, res) {
 
     res.json({
         success: true
     });
     console.log(req.body);
+});
+
+app.get('/syncftp', function (req, res) {
+
+    
 });
 //app.post('/resource/photo/src', function (req, res) {
 //    res.json({
