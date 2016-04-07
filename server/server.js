@@ -6,13 +6,15 @@ var express = require('express'),
     gm = require('gm');
 
 
-var templateRouter = require('./routes/templateRouter');
+var templateRouter = require('./routes/templateRouter'),
+    photoRouter = require('./routes/photoRouter');
 
 app.use(express.static(pathConfig.clientDir));
 app.use('/resource', express.static(pathConfig.resourceDir));
 app.use(bodyParser.json());
 
 app.use('/template', templateRouter);
+app.use('/photo', photoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

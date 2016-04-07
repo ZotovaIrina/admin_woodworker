@@ -1,6 +1,7 @@
 var app = require("../app");
 
-app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$timeout', 'FileUploader', 'baseResourceURL', function ($scope, $stateParams, photoService, $timeout, FileUploader, baseResourceURL) {
+app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$timeout', 'FileUploader', 'baseResourceURL', 'baseURL', '$http',
+    function ($scope, $stateParams, photoService, $timeout, FileUploader, baseResourceURL, baseURL, $http) {
 
     // Photo for which page controller should get
     var id = $stateParams.id;
@@ -15,6 +16,14 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
     $scope.loadingSrc = baseResourceURL + "/712.gif";
     $scope.loadingShow = false;
 
+    $scope.getTestData = function(){
+        var url = baseURL + "photo/";
+        $http.get(url)
+            .then(function (responce) {
+                console.log("get data new data: ");
+                console.log(responce);
+            });
+    };
 
     photoService.getPhoto(id)
         .then(function (contents) {
@@ -107,12 +116,26 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
                 indexObj = key;
             }
         });
-        if (indexObj !== undefined) {
+        if (indexObj === undefined) {
+            console.log("Элемент не найден");
+        } else {
             $scope.images[indexObj].caption = $scope.activeImage.caption;
             //send data on the server then get message from server success = true or not and show the message
-            ApplyNewContent($scope.images, "Изменения сохранены");
-        } else {
-            console.log("Элемент не найден");
+            //ApplyNewContent($scope.images, "Изменения сохранены");
+            var setData = {"data": "This is json data"};
+            photoService.setContents(id, $scope.images)
+                .then(function (resource) {
+                    if (resource.success) {
+                        console.log(resource);
+                        $scope.alert = true;
+                        $scope.alertMessage = resource.textMessage;
+                        $scope.alertColor = "alert-success";
+                    } else {
+                        $scope.alert = true;
+                        $scope.alertMessage = resource.status + " " + resource.statusText;
+                        $scope.alertColor = "alert-danger";
+                    }
+                });
         }
         $scope.modalClose();
     };
@@ -126,7 +149,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
     };
 
     var uploader = $scope.uploader = new FileUploader({
-        url: '/resource/photo'
+        url: baseURL + '/photo/room'
     });
 
 
@@ -139,7 +162,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
             newArray.push(img);
         });
         $scope.loadingShow = true;
-        uploader.uploadAll();
+
         photoService.setContents().update({id: id}, newArray).$promise
             .then(function (resourse) {
 
@@ -155,7 +178,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
                 $scope.loadingShow = false;
                 console.log("get new data");
                 //FixMe: download data from server
-               $scope.images = angular.copy(newArray);
+                $scope.images = angular.copy(newArray);
             })
             .catch(function () {
                 $scope.alert = true;

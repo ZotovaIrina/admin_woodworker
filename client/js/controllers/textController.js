@@ -21,7 +21,7 @@ app.controller('TextController', ['$scope', '$stateParams', 'textService', funct
                     $scope.alertColor = "alert-success";
                 } else {
                     $scope.alert = true;
-                    $scope.alertMessage = "Произошла ошибка";
+                    $scope.alertMessage = "Произошла ошибка "+ resource.status;
                     console.log("Error status: ", resource.status, resource.data);
                     $scope.alertColor = "alert-danger";
                 }

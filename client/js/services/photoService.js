@@ -5,7 +5,7 @@ app.constant("baseURL", "http://localhost:3000/");
 
 
 
-app.service('photoService', ['$resource', '$q', '$http', 'baseResourceURL', function ($resource, $q, $http, baseResourceURL) {
+app.service('photoService', ['$resource', '$q', '$http', 'baseResourceURL', 'baseURL', function ($resource, $q, $http, baseResourceURL, baseURL) {
 
 
     var contentJson = function () {
@@ -44,10 +44,17 @@ app.service('photoService', ['$resource', '$q', '$http', 'baseResourceURL', func
         });
     };
 
-
-    this.setContents = function(){
-
-        return $resource(baseResourceURL + '/content.json/data/content/:id', null, {'update': {method: 'PUT'}});
+//put json file
+    this.setContents = function(id, data){
+        var url = baseURL+ "photo/"+id;
+        console.log("url", url);
+        return $http.put(url, data)
+            .then(function (responce) {
+                return responce.data;
+            })
+            .catch(function (err) {
+                return err;
+            });
     };
 
 
