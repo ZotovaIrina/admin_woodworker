@@ -2,8 +2,8 @@ var express = require('express'),
     app = express(),
     pathConfig = require('./config/path'),
     bodyParser = require('body-parser'),
-    multiparty = require('multiparty'),
-    gm = require('gm');
+    path = require('path'),
+    multiparty = require('connect-multiparty');
 
 
 var templateRouter = require('./routes/templateRouter'),
@@ -16,23 +16,13 @@ app.use(bodyParser.json());
 app.use('/template', templateRouter);
 app.use('/photo', photoRouter);
 
+
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
-
-
-
-
-
-
-
-
-
-
-
 
 var server = app.listen(3000, function () {
     var host = server.address().address;
@@ -40,19 +30,6 @@ var server = app.listen(3000, function () {
     console.log('Server has been started');
 });
 
-app.put('/resource/content.json/data/content/:id', function (req, res) {
-    res.json({
-        success: true
-    });
-    console.log(req.body);
-});
-app.put('/resource/photo', function (req, res) {
-
-    res.json({
-        success: true
-    });
-    console.log(req.body);
-});
 
 
 

@@ -5,7 +5,7 @@ app.controller('Menu',['$scope','photoService', function ($scope, photoService) 
         $scope.sections = keys;
     });
 
-    photoService.getContents().then(function(contents) {
+    photoService.getJson().then(function(contents) {
         $scope.contents = contents;
     });
 

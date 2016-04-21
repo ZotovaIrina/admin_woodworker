@@ -7,27 +7,22 @@ app.constant("baseURL", "http://localhost:3000/");
 
 app.service('photoService', ['$resource', '$q', '$http', 'baseResourceURL', 'baseURL', function ($resource, $q, $http, baseResourceURL, baseURL) {
 
-
-    var contentJson = function () {
-        var promise = $resource(baseResourceURL + '/content.json').get().$promise;
-
-        return promise
-            .then(function (resource) {
-                if (resource.success) {
-                    return resource.data.content;
-                } else {
-                    return $q.reject('not success');
-                }
-            });
-
-    };
-
-    var info = contentJson();
-
     //get data from json-file
-    this.getContents = function () {
-        return info;
+    this.getJson = function () {
+        var url = baseURL+ "photo";
+        return $http.get(url)
+            .then(function (responce) {
+
+                return responce.data.data.content;
+            })
+            .catch(function (err) {
+                return err;
+            });
     };
+
+    var info = this.getJson();
+
+
 
     //get data from json-file for specific page
     this.getSections = function () {
@@ -43,6 +38,7 @@ app.service('photoService', ['$resource', '$q', '$http', 'baseResourceURL', 'bas
             return contents[index].images;
         });
     };
+
 
 //put json file
     this.setContents = function(id, data){
