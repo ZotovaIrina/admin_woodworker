@@ -2,3 +2,4 @@
 node_modules/
 .sass-cache/
 client/js/build.js
+server/data/photo

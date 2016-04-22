@@ -48,12 +48,24 @@ photoRouter.route('/:page')
 photoRouter.route('/:page/photo/:photoName')
 
     .get(function (req, res, next) {
-        console.log("get");
-        console.log(req.params);
         var page = req.params.page,
             photoName = req.params.photoName,
             fileAddress = '/data/photo/big/' + page + '/' + photoName;
         res.sendFile(path.join(pathConfig.serverDir + fileAddress));
+    })
+
+    .delete(function (req, res, next) {
+        console.log("delete");
+        console.log(req.params);
+        var page = req.params.page,
+            photoName = req.params.photoName,
+            fileAddressBig = '/data/photo/big/' + page + '/' + photoName,
+            fileAddressMini = '/data/photo/mini/' + page + '/' + photoName;
+        fs.unlink(path.join(pathConfig.serverDir + fileAddressBig));
+        fs.unlink(path.join(pathConfig.serverDir + fileAddressMini));
+        res.json({
+            success: true
+        });
     });
 
 photoRouter.route('/:page/image')
@@ -64,7 +76,6 @@ photoRouter.route('/:page/image')
     }),
     resizeImage,
     function (req, res) {
-        console.log("post request");
         var file = req.files.file;
         res.json({
             success: true,

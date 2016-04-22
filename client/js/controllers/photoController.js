@@ -72,8 +72,16 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
                 }
             });
             if (indexObj !== undefined) {
+                console.log("name ", name);
                 $scope.images.splice(indexObj, 1);
                 ApplyNewContent($scope.images);
+                photoService.delPhoto(id, name)
+                    .then(function () {
+                        console.log("Delete success");
+                    },
+                    function (err) {
+                        console.log("Error", err);
+                    });
             } else {
                 console.log("Элемент не найден");
             }

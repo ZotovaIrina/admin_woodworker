@@ -54,9 +54,9 @@ app.service('photoService', ['$resource', '$q', '$http', 'baseResourceURL', 'bas
     };
 
     //get new photo
-    this.getNewPhoto = function (PhotoAddress) {
-
-        return $http.get(PhotoAddress)
+    this.delPhoto = function (id, fileName) {
+        var url = baseURL+ "photo/" + id + "/photo/" + fileName;
+        return $http.delete(url)
             .then(function (responce) {
                 return responce.data;
             }, function (err) {
