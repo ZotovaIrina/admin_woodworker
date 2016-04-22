@@ -53,5 +53,16 @@ app.service('photoService', ['$resource', '$q', '$http', 'baseResourceURL', 'bas
             });
     };
 
+    //get new photo
+    this.getNewPhoto = function (PhotoAddress) {
+
+        return $http.get(PhotoAddress)
+            .then(function (responce) {
+                return responce.data;
+            }, function (err) {
+                return err.data;
+            });
+    };
+
 
 }]);

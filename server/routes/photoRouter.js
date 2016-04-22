@@ -6,6 +6,10 @@ var express = require('express'),
     multiparty = require('connect-multiparty'),
     fs = require('fs');
 
+
+var resizeImage = require('../middleware/resizeImage.js');
+
+
 var photoRouter = express.Router();
 
 photoRouter.use(bodyParser.json());
@@ -40,17 +44,31 @@ photoRouter.route('/:page')
 
     });
 
+
+photoRouter.route('/:page/photo/:photoName')
+
+    .get(function (req, res, next) {
+        console.log("get");
+        console.log(req.params);
+        var page = req.params.page,
+            photoName = req.params.photoName,
+            fileAddress = '/data/photo/big/' + page + '/' + photoName;
+        res.sendFile(path.join(pathConfig.serverDir + fileAddress));
+    });
+
 photoRouter.route('/:page/image')
 
-    .post(multiparty({
+    .post(
+    multiparty({
         uploadDir: path.join(pathConfig.photoDir, 'temp/')
-    }), function (req, res) {
+    }),
+    resizeImage,
+    function (req, res) {
         console.log("post request");
         var file = req.files.file;
         res.json({
             success: true,
-            textMessage: 'Новое фото успешно сохранено',
-            file: file
+            textMessage: 'Новое фото успешно сохранено'
         });
     });
 
