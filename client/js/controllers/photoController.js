@@ -145,10 +145,9 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
             uploader.onCompleteAll = function () {
                 $scope.loadingShow = false;
                 console.info('onCompleteAll');
-             //  $scope.images = angular.copy(newArray);
-              //  uploader.clearQueue();
+                $scope.images = angular.copy(newArray);
+                uploader.clearQueue();
             };
-
             $scope.modalClose();
 
             //

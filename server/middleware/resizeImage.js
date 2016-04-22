@@ -27,14 +27,24 @@ module.exports = function resizeImage(req, res, next) {
         dstPathBig
     ];
 
-    im.convert(argsMini, function(err) {
-        if(err) { throw err; }
-        console.log("Image mini resize complete");
+    var p1 = new Promise(function(resolve, reject){
+        im.convert(argsMini, function(err) {
+            if(err) { throw err; }
+            console.log("Image mini resize complete");
+            resolve();
+        });
     });
-    im.convert(argsBig, function(err) {
-        if(err) { throw err; }
-        console.log("Image big resize complete");
+
+    var p2 = new Promise(function(resolve, reject){
+        im.convert(argsBig, function(err) {
+            if(err) { throw err; }
+            console.log("Image big resize complete");
+            resolve();
+        });
     });
-    next();
+
+    Promise.all([p1, p2])
+        .then(next);
+
 };
 
