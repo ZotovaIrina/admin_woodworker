@@ -204,7 +204,7 @@ title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > smal
 }
 
 .lock {
-  /* ╨б╨║╤А╤Л╨▓╨░╨╡╨╝ ╤Б╨║╤А╨╛╨╗╨╗╨▒╨░╤А╤Л */
+  /* Скрываем скроллбары */
   overflow: hidden;
 }
 

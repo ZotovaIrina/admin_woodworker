@@ -133,7 +133,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         };
 
         var uploader = $scope.uploader = new FileUploader({
-            url: baseURL + 'photo/baby/image',
+            url: baseURL + 'photo/'+ id + '/image',
             method: "POST"
         });
 

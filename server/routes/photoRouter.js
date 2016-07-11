@@ -61,8 +61,13 @@ photoRouter.route('/:page/photo/:photoName')
             photoName = req.params.photoName,
             fileAddressBig = '/data/photo/big/' + page + '/' + photoName,
             fileAddressMini = '/data/photo/mini/' + page + '/' + photoName;
-        fs.unlink(path.join(pathConfig.serverDir + fileAddressBig));
-        fs.unlink(path.join(pathConfig.serverDir + fileAddressMini));
+        console.log("big file delete: ", path.join(pathConfig.serverDir + fileAddressBig));
+        fs.unlink(path.join(pathConfig.serverDir + fileAddressBig), function(response) {
+            console.log("delete file success");
+        });
+        fs.unlink(path.join(pathConfig.serverDir + fileAddressMini), function(response) {
+            console.log("delete file success", response);
+        });
         res.json({
             success: true
         });
@@ -77,6 +82,7 @@ photoRouter.route('/:page/image')
     resizeImage,
     function (req, res) {
         var file = req.files.file;
+        console.log("router");
         res.json({
             success: true,
             textMessage: 'Новое фото успешно сохранено'

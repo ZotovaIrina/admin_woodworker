@@ -56,6 +56,7 @@ app.service('photoService', ['$resource', '$q', '$http', 'baseResourceURL', 'bas
     //get new photo
     this.delPhoto = function (id, fileName) {
         var url = baseURL+ "photo/" + id + "/photo/" + fileName;
+        console.log("delete url: ", url);
         return $http.delete(url)
             .then(function (responce) {
                 return responce.data;
