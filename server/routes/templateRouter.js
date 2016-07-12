@@ -12,13 +12,13 @@ templateRouter.route('/:template')
 
     .get(function (req, res, next) {
         var template = req.params.template,
-            fileAddress = '/data/template/' + template + '.html';
-        res.sendFile(path.join(pathConfig.serverDir + fileAddress));
+            fileAddress = template + '.html';
+        res.sendFile(path.join(pathConfig.templateDir + fileAddress));
     })
 
     .put(function (req, res, next) {
         var template = req.params.template,
-            fileAddress = pathConfig.serverDir + '/data/template/' + template + '.html';
+            fileAddress = pathConfig.templateDir + template + '.html';
         fs.writeFile(fileAddress, req.body.data, function (err) {
             if (err) {
                 console.log(err);
