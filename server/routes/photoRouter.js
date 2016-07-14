@@ -18,7 +18,7 @@ photoRouter.use(bodyParser.json());
 photoRouter.route('/')
 
     .get(function (req, res) {
-        var file = pathConfig.serverDir + '/data/content.json';
+        var file = pathConfig.jsonDir + 'content.json';
         jsonfile.readFile(file, function (err, content) {
             res.json(content);
         })
@@ -28,7 +28,7 @@ photoRouter.route('/')
 photoRouter.route('/:page')
 
     .put(function (req, res) {
-        var file = pathConfig.serverDir + '/data/content.json',
+        var file = pathConfig.jsonDir + 'content.json',
             page = req.params.page;
         jsonfile.readFile(file, function (err, content) {
             console.log('page', page);
@@ -50,8 +50,8 @@ photoRouter.route('/:page/photo/:photoName')
     .get(function (req, res, next) {
         var page = req.params.page,
             photoName = req.params.photoName,
-            fileAddress = '/data/photo/big/' + page + '/' + photoName;
-        res.sendFile(path.join(pathConfig.serverDir + fileAddress));
+            fileAddress = 'big/' + page + '/' + photoName;
+        res.sendFile(path.join(pathConfig.photoDir + fileAddress));
     })
 
     .delete(function (req, res, next) {
@@ -59,13 +59,13 @@ photoRouter.route('/:page/photo/:photoName')
         console.log(req.params);
         var page = req.params.page,
             photoName = req.params.photoName,
-            fileAddressBig = '/data/photo/big/' + page + '/' + photoName,
-            fileAddressMini = '/data/photo/mini/' + page + '/' + photoName;
-        console.log("big file delete: ", path.join(pathConfig.serverDir + fileAddressBig));
-        fs.unlink(path.join(pathConfig.serverDir + fileAddressBig), function(response) {
+            fileAddressBig = 'big/' + page + '/' + photoName,
+            fileAddressMini = '/mini/' + page + '/' + photoName;
+        console.log("big file delete: ", path.join(pathConfig.photoDir + fileAddressBig));
+        fs.unlink(path.join(pathConfig.photoDir + fileAddressBig), function(response) {
             console.log("delete file success");
         });
-        fs.unlink(path.join(pathConfig.serverDir + fileAddressMini), function(response) {
+        fs.unlink(path.join(pathConfig.photoDir + fileAddressMini), function(response) {
             console.log("delete file success", response);
         });
         res.json({
@@ -77,7 +77,7 @@ photoRouter.route('/:page/image')
 
     .post(
     multiparty({
-        uploadDir: path.join(pathConfig.photoDir, 'temp/')
+        uploadDir: path.join(pathConfig.serverDir, 'data/photo/temp/')
     }),
     resizeImage,
     function (req, res) {
