@@ -19,6 +19,7 @@ photoRouter.route('/')
 
     .get(function (req, res) {
         var file = pathConfig.jsonDir + 'content.json';
+        console.log("send file from adress: ", file);
         jsonfile.readFile(file, function (err, content) {
             res.json(content);
         })
@@ -85,6 +86,7 @@ photoRouter.route('/:page/image')
         console.log("router");
         res.json({
             success: true,
+            photoAdress: req.doc.dstPathBig,
             textMessage: 'Новое фото успешно сохранено'
         });
     });

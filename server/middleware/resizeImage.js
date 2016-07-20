@@ -26,7 +26,7 @@ module.exports = function resizeImage(req, res, next) {
         "940",
         dstPathBig
     ];
-console.log("resize image srcPath: ", srcPath, " dstPathMini: ", dstPathMini);
+console.log("resize image srcPath: ", srcPath, " to dstPathMini: ", dstPathMini);
     var p1 = new Promise(function(resolve, reject){
         im.convert(argsMini, function(err) {
             if(err) {
@@ -35,6 +35,7 @@ console.log("resize image srcPath: ", srcPath, " dstPathMini: ", dstPathMini);
             }
             else {
                 console.log("Image mini resize complete");
+                req.doc.dstPathBig = dstPathBig;
                 resolve();
             }
 

@@ -6,6 +6,7 @@
   "dependencies": {
     "angular": "^1.4.8",
     "angular-animate": "^1.4.8",
+    "angular-cookies": "^1.5.7",
     "angular-file-upload": "^2.2.0",
     "angular-resource": "^1.4.8",
     "angular-route": "^1.4.8",
@@ -54,7 +55,8 @@
         "angular-animate",
         "angular-ui-router",
         "angular-resource",
-        "angular-file-upload"
+        "angular-file-upload",
+        "angular-cookies"
       ]
     }
   },
