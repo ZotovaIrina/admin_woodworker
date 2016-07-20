@@ -5,16 +5,11 @@ app
         function ($stateProvider, $urlRouterProvider) {
             console.log("state provider");
             $stateProvider
-                .state('app', {
-                    url: '/',
+                .state('login', {
+                    url: '/login',
                     views: {
                         'content': {
-                            //templateProvider: function () {
-                            //    console.log('templateProvider');
-                            //    $scope.text = simpleObj.value;
-                            //    return '<h1> Hello</h1> <h4>have a good day</h4>';
-                            //},
-                            templateUrl: 'template/mainPage.html',
+                            templateUrl: 'template/login.html',
                             controller: 'StartController'
                         },
                         'menu': {
@@ -23,21 +18,16 @@ app
                         }
                     }
                 })
-                .state('login', {
-                    url: 'login',
+                .state('app', {
+                    url: '/',
                     views: {
-                        'content@': {
-                            templateUrl: 'template/login.html',
+                        'content': {
+                            templateUrl: 'template/mainPage.html',
                             controller: 'StartController'
-                        }
-                    }
-                })
-                .state('app.mediaPhoto', {
-                    url: 'mediaPhoto/:id',
-                    views: {
-                        'content@': {
-                            templateUrl: 'template/mediaPhoto.html',
-                            controller: 'PhotoController'
+                        },
+                        'menu': {
+                            templateUrl: 'template/menu.html',
+                            controller: 'Menu'
                         }
                     },
                     resolve: {
@@ -47,11 +37,21 @@ app
                                 .then(function (user) {
                                     console.log("service return user: ", user);
                                     if (user === undefined) {
-                                        return $state.go('app.login');
+                                        return $state.go('login');
                                     }
                                     return "user auth";
                                 });
                         }]
+                    }
+                })
+
+                .state('app.mediaPhoto', {
+                    url: 'mediaPhoto/:id',
+                    views: {
+                        'content@': {
+                            templateUrl: 'template/mediaPhoto.html',
+                            controller: 'PhotoController'
+                        }
                     }
                 })
                 .state('app.templateEditor', {
