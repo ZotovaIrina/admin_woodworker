@@ -1,9 +1,5 @@
 var app = require("../app");
 
-//app.constant("baseResourceURL", "http://88.225.73.124:3000//resource");
-//app.constant("baseURL", "http://188.225.73.124:3000/");
-app.constant("baseResourceURL", "localhost//resource");
-app.constant("baseURL", "http://localhost:3000/");
 
 
 app.service('photoService', ['$resource', '$q', '$http', 'baseResourceURL', 'baseURL', function ($resource, $q, $http, baseResourceURL, baseURL) {

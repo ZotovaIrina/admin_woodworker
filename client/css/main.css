@@ -59,11 +59,6 @@ html {
   margin-top: 2px;
 }
 
-.side-menu-h3 {
-  color: #FFD119;
-  font-size: 2rem;
-}
-
 a.list-group-item, button.list-group-item {
   color: #241b18;
 }
@@ -76,26 +71,9 @@ title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > smal
   padding: 0;
 }
 
-#login-menu {
-  display: block;
-  width: 100%;
-  position: absolute;
-  bottom: 10px;
-  padding: 3px;
-}
-
-.login-menu-block {
-  border-radius: 4px;
-  padding: 10px;
-  margin-bottom: 3px;
-}
-
-.login-menu-label {
-  width: 100%;
-}
-
-.login-menu-input {
-  width: 100%;
+.side-menu-h3 {
+  color: #FFD119;
+  font-size: 2rem;
 }
 
 .start-img {
@@ -289,6 +267,26 @@ canvas {
 
 .animate-show.ng-hide {
   opacity: 0;
+}
+
+#login-menu {
+  display: block;
+  width: 100%;
+  padding: 3px;
+}
+
+.login-menu-block {
+  border-radius: 4px;
+  padding: 10px 0;
+  margin-bottom: 3px;
+}
+
+.login-menu-label {
+  width: 100%;
+}
+
+.login-menu-input {
+  width: 100%;
 }
 
 /*# sourceMappingURL=main.css.map */

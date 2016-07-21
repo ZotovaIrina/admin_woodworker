@@ -1,7 +1,8 @@
 var app = require("../app");
 
 
-app.service('mainService', ['$http', '$q', '$cookies', function ($http, $q, $cookies) {
+app.service('mainService', ['$http', '$q', '$cookies', 'baseURL',
+    function ($http, $q, $cookies, baseURL) {
 
     this.getHtml = function () {
         console.log("service getHtml");
@@ -20,6 +21,24 @@ app.service('mainService', ['$http', '$q', '$cookies', function ($http, $q, $coo
         var user = $cookies.get('user');
         console.log("get user: ", user);
         return  $q.resolve(user);
+    };
+
+    this.logIn = function (user) {
+        var URL = baseURL + 'login';
+        console.log("service", user);
+        return $http.post(URL, user)
+            .then(function (response) {
+            //    $cookies.put('putObject', response.data.user);
+            //    user = response.data;
+            //    return response.data;
+            //}, function (err) {
+            //    return $q.reject(err);
+            return response;
+            })
+            .catch(function(error) {
+                console.log("get error:", error);
+                return $q.reject(error);
+            });
     };
 
 
