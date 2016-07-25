@@ -2,7 +2,8 @@ var app = require("../app");
 
 
 
-app.service('photoService', ['$resource', '$q', '$http', 'baseResourceURL', 'baseURL', function ($resource, $q, $http, baseResourceURL, baseURL) {
+app.service('photoService', ['$resource', '$q', '$http', 'baseResourceURL', 'baseURL', '$cookies',
+    function ($resource, $q, $http, baseResourceURL, baseURL, $cookies) {
 
     //get data from json-file
     this.getJson = function () {
@@ -28,9 +29,10 @@ app.service('photoService', ['$resource', '$q', '$http', 'baseResourceURL', 'bas
 
 //put json file
     this.setContents = function(id, data){
+        var user = $cookies.get('user');
         var url = baseURL+ "photo/"+id;
         console.log("url", url);
-        return $http.put(url, data)
+        return $http.put(url, data, user)
             .then(function (responce) {
                 return responce.data;
             })
@@ -41,13 +43,16 @@ app.service('photoService', ['$resource', '$q', '$http', 'baseResourceURL', 'bas
 
     //get new photo
     this.delPhoto = function (id, fileName) {
+        var user = $cookies.get('user');
         var url = baseURL+ "photo/" + id + "/photo/" + fileName;
         console.log("delete url: ", url);
-        return $http.delete(url)
+        return $http.delete(url, user)
             .then(function (responce) {
                 return responce.data;
-            }, function (err) {
-                return err.data;
+            })
+            .catch(function (err) {
+                console.log("catch error in service");
+                return err;
             });
     };
 

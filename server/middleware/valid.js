@@ -6,20 +6,26 @@ var express = require('express'),
 
 module.exports = function valid(req, res, next) {
 
-
-    console.log("validation get data: ", req.body);
-    if (req.body.userName === loginData.username) {
-        console.log("username correct");
-        if (req.body.userPassword === loginData.password) {
-            console.log("password correct");
-            req.valid = true;
-            return next();
+var user = req.body.user || req.headers.user;
+    if(user !==undefined) {
+        if (typeof user == 'string') {
+            user = JSON.parse(user);
         }
-        var err = new Error('You are not authenticated!');
-        err.status = 401;
-        err.statusText = "Username or password is not correct";
-        return next(err);
-    } else {
+
+        console.log("validation get data: ", user);
+        if (user.userName === loginData.username) {
+            console.log("username correct");
+            if (user.userPassword === loginData.password) {
+                console.log("password correct");
+                return next();
+            }
+            var err = new Error('You are not authenticated!');
+            err.status = 401;
+            err.statusText = "Username or password is not correct";
+            return next(err);
+        }
+    }
+     else {
         console.log("username not correct");
         var err = new Error('You are not authenticated!');
         err.status = 401;

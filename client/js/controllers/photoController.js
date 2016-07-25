@@ -53,11 +53,15 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
                         $scope.alert = true;
                         $scope.alertMessage = resource.textMessage;
                         $scope.alertColor = "alert-success";
-                    } else {
-                        $scope.alert = true;
-                        $scope.alertMessage = "Произошла ошибка: " + resource.status + " " + resource.statusText;
-                        $scope.alertColor = "alert-danger";
+                    }})
+                    .catch(function (error) {
+                    if (error.status == 401) {
+                        $state.go('login');
                     }
+                    console.log("controller get error");
+                    $scope.alert = true;
+                    $scope.alertMessage = "Произошла ошибка: " + error.status + " " + error.statusText;
+                    $scope.alertColor = "alert-danger";
                 });
         }
 
@@ -78,9 +82,15 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
                 photoService.delPhoto(id, name)
                     .then(function () {
                         console.log("Delete success");
-                    },
-                    function (err) {
-                        console.log("Error", err);
+                    })
+                    .catch(function (error) {
+                        if (error.status == 401) {
+                            $state.go('login');
+                        }
+                        console.log("controller get error");
+                        $scope.alert = true;
+                        $scope.alertMessage = "Произошла ошибка: " + error.status + " " + error.statusText;
+                        $scope.alertColor = "alert-danger";
                     });
             } else {
                 console.log("Элемент не найден");

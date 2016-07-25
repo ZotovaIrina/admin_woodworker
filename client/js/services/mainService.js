@@ -18,7 +18,7 @@ app.service('mainService', ['$http', '$q', '$cookies', 'baseURL',
     this.currentUser = function () {
         console.log("service");
         //$cookies.putObject('user', {"username": "admin", "password": "111"});
-        var user = $cookies.get('user');
+        var user = $cookies.getObject('user');
         console.log("get user: ", user);
         return  $q.resolve(user);
     };
@@ -26,14 +26,10 @@ app.service('mainService', ['$http', '$q', '$cookies', 'baseURL',
     this.logIn = function (user) {
         var URL = baseURL + 'login';
         console.log("service", user);
-        return $http.post(URL, user)
+        return $http.post(URL, {user: user})
             .then(function (response) {
-            //    $cookies.put('putObject', response.data.user);
-            //    user = response.data;
-            //    return response.data;
-            //}, function (err) {
-            //    return $q.reject(err);
-            return response;
+                $cookies.putObject('user', user);
+                return response.data;
             })
             .catch(function(error) {
                 console.log("get error:", error);

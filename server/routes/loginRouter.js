@@ -12,34 +12,20 @@ router.use(bodyParser.json());
 var valid = require('../middleware/valid.js');
 
 
-
 router.route('/')
 
-.post(
+    .post(
     valid,
-    function(req, res) {
+    function (req, res) {
         console.log("login router");
-        //var file = path.join(pathConfig.dataDir + '/login.html');
-        //console.log("send file: ", file);
-        //res.sendFile(file);
-        if(req.valid === true) {
-            res.json({
-                "success": true,
-                "message": "log in"
-            });
-        } else {
-            res.json({
-                "success": false,
-                "message": "log in incorrect"
-            });
-        }
-
+        res.json({
+            "success": true,
+            "message": "log in"
+        });
 
     }
 )
 ;
-
-
 
 
 module.exports = router;

@@ -1,6 +1,6 @@
 var app = require("../app");
 
-app.controller('loginController', ['$scope', 'mainService', function ($scope, mainService) {
+app.controller('loginController', ['$scope', 'mainService', '$state', function ($scope, mainService, $state) {
 
     $scope.login = {};
     $scope.alert = false;
@@ -12,6 +12,7 @@ app.controller('loginController', ['$scope', 'mainService', function ($scope, ma
         mainService.logIn($scope.login)
             .then(function(responce) {
                 console.log("controller get responce: ", responce);
+                $state.go('app');
             })
             .catch(function(error) {
                 console.log("controller get error");

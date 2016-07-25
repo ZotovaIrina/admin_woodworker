@@ -8,6 +8,7 @@ var express = require('express'),
 
 
 var resizeImage = require('../middleware/resizeImage.js');
+var valid = require('../middleware/valid.js');
 
 
 var photoRouter = express.Router();
@@ -28,7 +29,9 @@ photoRouter.route('/')
 
 photoRouter.route('/:page')
 
-    .put(function (req, res) {
+    .put(
+    valid,
+    function (req, res) {
         var file = pathConfig.jsonDir + 'content.json',
             page = req.params.page;
         jsonfile.readFile(file, function (err, content) {
@@ -55,7 +58,8 @@ photoRouter.route('/:page/photo/:photoName')
         res.sendFile(path.join(pathConfig.photoDir + fileAddress));
     })
 
-    .delete(function (req, res, next) {
+    .delete(valid,
+    function (req, res, next) {
         console.log("delete");
         console.log(req.params);
         var page = req.params.page,
@@ -77,6 +81,7 @@ photoRouter.route('/:page/photo/:photoName')
 photoRouter.route('/:page/image')
 
     .post(
+    valid,
     multiparty({
         uploadDir: path.join(pathConfig.serverDir, 'data/photo/temp/')
     }),

@@ -4,6 +4,8 @@ var express = require('express'),
     pathConfig = require('../config/path'),
     fs = require('fs');
 
+var valid = require('../middleware/valid.js');
+
 var templateRouter = express.Router();
 
 templateRouter.use(bodyParser.json());
@@ -16,7 +18,9 @@ templateRouter.route('/:template')
         res.sendFile(path.join(pathConfig.templateDir + fileAddress));
     })
 
-    .put(function (req, res, next) {
+    .put(
+    valid,
+    function (req, res, next) {
         var template = req.params.template,
             fileAddress = pathConfig.templateDir + template + '.html';
         fs.writeFile(fileAddress, req.body.data, function (err) {
