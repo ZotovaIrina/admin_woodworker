@@ -30,30 +30,48 @@ app.service('photoService', ['$resource', '$q', '$http', 'baseResourceURL', 'bas
 //put json file
     this.setContents = function(id, data){
         var user = $cookies.get('user');
-        var url = baseURL+ "photo/"+id;
-        console.log("url", url);
-        return $http.put(url, data, user)
-            .then(function (responce) {
-                return responce.data;
-            })
-            .catch(function (err) {
-                return err;
-            });
+        if(user === undefined) {
+            console.log("user undefined");
+            var error = {
+                status: 401,
+                statusText: "user underfined"
+            };
+            return $q.reject(error);
+        } else {
+            var url = baseURL + "photo/" + id;
+            console.log("url", url);
+            return $http.put(url, data, user)
+                .then(function (responce) {
+                    return responce.data;
+                })
+                .catch(function (err) {
+                    return err;
+                });
+        }
     };
 
     //get new photo
     this.delPhoto = function (id, fileName) {
         var user = $cookies.get('user');
-        var url = baseURL+ "photo/" + id + "/photo/" + fileName;
-        console.log("delete url: ", url);
-        return $http.delete(url, user)
-            .then(function (responce) {
-                return responce.data;
-            })
-            .catch(function (err) {
-                console.log("catch error in service");
-                return err;
-            });
+        if(user === undefined) {
+            console.log("user undefined");
+            var error = {
+                status: 401,
+                statusText: "user underfined"
+            };
+            return $q.reject(error);
+        } else {
+            var url = baseURL + "photo/" + id + "/photo/" + fileName;
+            console.log("delete url: ", url);
+            return $http.delete(url, user)
+                .then(function (responce) {
+                    return responce.data;
+                })
+                .catch(function (err) {
+                    console.log("catch error in service");
+                    return err;
+                });
+        }
     };
 
 

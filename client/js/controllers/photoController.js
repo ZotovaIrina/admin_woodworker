@@ -1,7 +1,7 @@
 var app = require("../app");
 
-app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$timeout', 'FileUploader', 'baseResourceURL', 'baseURL', '$http',
-    function ($scope, $stateParams, photoService, $timeout, FileUploader, baseResourceURL, baseURL, $http) {
+app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$timeout', 'FileUploader', 'baseResourceURL', 'baseURL', '$state', '$http',
+    function ($scope, $stateParams, photoService, $timeout, FileUploader, baseResourceURL, baseURL, $state) {
 
         // Photo for which page controller should get
         var id = $stateParams.id;
@@ -55,13 +55,16 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
                         $scope.alertColor = "alert-success";
                     }})
                     .catch(function (error) {
+                    console.log("catch error", error);
                     if (error.status == 401) {
+                        console.log("catch error", error);
                         $state.go('login');
+                    } else {
+                        console.log("controller get error", error);
+                        $scope.alert = true;
+                        $scope.alertMessage = "Произошла ошибка: " + error.status + " " + error.statusText;
+                        $scope.alertColor = "alert-danger";
                     }
-                    console.log("controller get error");
-                    $scope.alert = true;
-                    $scope.alertMessage = "Произошла ошибка: " + error.status + " " + error.statusText;
-                    $scope.alertColor = "alert-danger";
                 });
         }
 
@@ -84,13 +87,16 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
                         console.log("Delete success");
                     })
                     .catch(function (error) {
+                        console.log("catch error", error);
                         if (error.status == 401) {
+                            console.log("catch error", error);
                             $state.go('login');
+                        } else {
+                            console.log("controller get error", error);
+                            $scope.alert = true;
+                            $scope.alertMessage = "Произошла ошибка: " + error.status + " " + error.statusText;
+                            $scope.alertColor = "alert-danger";
                         }
-                        console.log("controller get error");
-                        $scope.alert = true;
-                        $scope.alertMessage = "Произошла ошибка: " + error.status + " " + error.statusText;
-                        $scope.alertColor = "alert-danger";
                     });
             } else {
                 console.log("Элемент не найден");
