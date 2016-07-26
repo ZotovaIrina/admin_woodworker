@@ -3,7 +3,8 @@ var express = require('express'),
     pathConfig = require('./config/path'),
     bodyParser = require('body-parser'),
     path = require('path'),
-    multiparty = require('connect-multiparty');
+    multiparty = require('connect-multiparty'),
+    cors = require('cors');
 
 
 var templateRouter = require('./routes/templateRouter'),
@@ -13,6 +14,7 @@ var templateRouter = require('./routes/templateRouter'),
 app.use(express.static(pathConfig.clientDir));
 app.use('/resource', express.static(pathConfig.resourceDir));
 app.use(bodyParser.json());
+app.use(cors());
 
 app.use('/template', templateRouter);
 app.use('/photo', photoRouter);

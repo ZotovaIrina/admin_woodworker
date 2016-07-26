@@ -9,7 +9,8 @@ module.exports = {
     photoDir: path.join(__dirname, '../../../woodworker/public/image/photo/'),
     templateDir: path.join(__dirname, '../../../woodworker/public/template/'),
     clientDir: path.join(__dirname, '../../client'),
-    resourceDir: path.join(__dirname, '../resource')
+    resourceDir: path.join(__dirname, '../resource'),
+    dataDir: path.join(__dirname, '../data')
 };
 
 
