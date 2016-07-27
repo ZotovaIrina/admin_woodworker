@@ -7,7 +7,7 @@ module.exports = {
     serverDir: path.join(__dirname, '../'),
     jsonDir: path.join(__dirname, '../../../woodworker/public/json/'),
     photoDir: path.join(__dirname, '../../../woodworker/public/image/photo/'),
-    photoDir: path.join(__dirname, '../../../woodworker/public/image/photo/temp'),
+    tempDir: path.join(__dirname, '../../../woodworker/public/image/photo/temp'),
     templateDir: path.join(__dirname, '../../../woodworker/public/template/'),
     clientDir: path.join(__dirname, '../../client'),
     resourceDir: path.join(__dirname, '../resource'),
