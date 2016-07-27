@@ -87,11 +87,11 @@ photoRouter.route('/:page/image')
     }),
     resizeImage,
     function (req, res) {
+        console.log('req!!!!!!!!!!!!!!!!!', req);
         var file = req.files.file;
         console.log("router");
         res.json({
             success: true,
-            photoAdress: req.doc.dstPathBig,
             textMessage: 'Новое фото успешно сохранено'
         });
     });

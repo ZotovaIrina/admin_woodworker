@@ -7,6 +7,7 @@ var express = require('express'),
 module.exports = function valid(req, res, next) {
 
 var user = req.body.user || req.headers.user;
+    console.log("req.headers", req.headers);
     if(user !==undefined) {
         if (typeof user == 'string') {
             user = JSON.parse(user);

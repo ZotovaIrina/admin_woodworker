@@ -1,10 +1,12 @@
 var app = require("../app");
 
-app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$timeout', 'FileUploader', 'baseResourceURL', 'baseURL', '$state', '$http',
-    function ($scope, $stateParams, photoService, $timeout, FileUploader, baseResourceURL, baseURL, $state) {
+app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$timeout', 'FileUploader',
+    'baseResourceURL', 'baseURL', '$state', '$cookies',
+    function ($scope, $stateParams, photoService, $timeout, FileUploader, baseResourceURL, baseURL, $state, $cookies) {
 
         // Photo for which page controller should get
         var id = $stateParams.id;
+        var user = $cookies.get('user');
 
         //string for ng-src="{{src}}{{image.name}}"
         $scope.src = baseURL + "photo/" + id + "/photo/";
@@ -15,6 +17,10 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         $scope.alertColor = "";
         $scope.loadingSrc = baseResourceURL + "/712.gif";
         $scope.loadingShow = false;
+
+        if(user === undefined) {
+            $state.go('login');
+        }
 
         photoService.getPhoto(id)
             .then(function (contents) {
@@ -46,6 +52,9 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
 
 //local function for set data in content.json
         function ApplyNewContent(data) {
+            if(user === undefined) {
+                $state.go('login');
+            }
             photoService.setContents(id, data)
                 .then(function (resource) {
                     if (resource.success) {
@@ -150,11 +159,16 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
 
         var uploader = $scope.uploader = new FileUploader({
             url: baseURL + 'photo/'+ id + '/image',
-            method: "POST"
+            method: "POST",
+            headers: {user: user},
+            formData: [{formData: 'one'}]
         });
 
 
         $scope.AddPhoto = function () {
+            if(user === undefined) {
+                $state.go('login');
+            }
             var newArray = angular.copy($scope.images);
             angular.forEach(uploader.queue, function (item, key) {
                 var img = {};
@@ -166,11 +180,17 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
             $scope.loadingShow = true;
             ApplyNewContent(newArray);
             uploader.uploadAll();
+            uploader.onError = function(response, status, headers) {
+                console.log("onError", response, status, headers);
+            };
+            $scope.images = angular.copy(newArray);
             uploader.onCompleteAll = function () {
                 $scope.loadingShow = false;
                 console.info('onCompleteAll');
-                $scope.images = angular.copy(newArray);
                 uploader.clearQueue();
+            };
+            uploader.onComplete = function(response, status, headers) {
+                console.log("onComplete", response, status, headers);
             };
             $scope.modalClose();
 

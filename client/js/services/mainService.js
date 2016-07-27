@@ -18,7 +18,7 @@ app.service('mainService', ['$http', '$q', '$cookies', 'baseURL',
     this.currentUser = function () {
         console.log("service");
         //$cookies.putObject('user', {"username": "admin", "password": "111"});
-        var user = $cookies.getObject('user');
+        var user = $cookies.get('user');
         console.log("get user: ", user);
         return  $q.resolve(user);
     };

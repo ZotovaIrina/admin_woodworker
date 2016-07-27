@@ -35,7 +35,6 @@ console.log("resize image srcPath: ", srcPath, " to dstPathMini: ", dstPathMini)
             }
             else {
                 console.log("Image mini resize complete");
-                req.doc.dstPathBig = dstPathBig;
                 resolve();
             }
 
