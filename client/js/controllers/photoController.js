@@ -180,17 +180,11 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
             $scope.loadingShow = true;
             ApplyNewContent(newArray);
             uploader.uploadAll();
-            uploader.onError = function(response, status, headers) {
-                console.log("onError", response, status, headers);
-            };
-            $scope.images = angular.copy(newArray);
             uploader.onCompleteAll = function () {
                 $scope.loadingShow = false;
                 console.info('onCompleteAll');
+                $scope.images = angular.copy(newArray);
                 uploader.clearQueue();
-            };
-            uploader.onComplete = function(response, status, headers) {
-                console.log("onComplete", response, status, headers);
             };
             $scope.modalClose();
 

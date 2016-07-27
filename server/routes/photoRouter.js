@@ -83,11 +83,10 @@ photoRouter.route('/:page/image')
     .post(
     valid,
     multiparty({
-        uploadDir: path.join(pathConfig.serverDir, 'data/photo/temp/')
+        uploadDir: path.join(pathConfig.tempDir)
     }),
     resizeImage,
     function (req, res) {
-        console.log('req!!!!!!!!!!!!!!!!!', req);
         var file = req.files.file;
         console.log("router");
         res.json({
