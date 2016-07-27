@@ -18,8 +18,8 @@ app
                             controller: 'loginController'
                         },
                         'menu': {
-                            templateUrl: 'template/menu.html',
-                            controller: 'Menu'
+                            //templateUrl: 'template/menu.html',
+                            //controller: 'Menu'
                         }
                     }
                 })
