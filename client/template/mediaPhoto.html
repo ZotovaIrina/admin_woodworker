@@ -83,7 +83,8 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default" type="button" ng-click="modalClose()">Cancel</button>
-                <button class="btn btn-info" type="button" ng-click="EditPhoto()" ng-disabled="!captionIsChanged">OK</button>
+                <button class="btn btn-info" type="button" ng-click="EditPhoto()" ng-disabled="!captionIsChanged">OK
+                </button>
             </div>
         </div>
 
@@ -94,18 +95,17 @@
                 <button type="button" class="close" ng-click="modalClose()"><span>&times;</span></button>
                 <h4>Добавление нового фото на страницу</h4>
             </div>
-            <div class="modal-body" ng-show="uploader.queue.length !== 0">
+            <div class="modal-body" ng-show="files.length !== 0">
 
-                <div ng-repeat="item in uploader.queue">
+                <div ng-repeat="file in files">
                     <div class="modal-add-row">
                         <div class="row">
                             <!-- Image preview -->
                             <div class="col-xs-12">
-                                <div class="imagePreview" ng-show="uploader.isHTML5"
-                                     ng-thumb="{ file: item._file, width: 200 }">
-                                </div>
+                                    <img ngf-src="file"
+                                         class="thumb imagePreview">
                                 <div class="imageComment">
-                                    <p>Описание для файла {{ item.file.name }}:</p>
+                                    <p>Описание для файла {{ file.name }}:</p>
                                     <textarea class="form-control"
                                               rows="3"
                                               ng-model="item.caption">
@@ -126,12 +126,23 @@
 
             </div>
             <div class="modal-footer">
-                <h4 class="modal-add-footer">Выберете файл</h4>
-                <input type="file"
-                       nv-file-select=""
-                       uploader="uploader"
-                       multiple/>
+                <form name="uploadForm">
 
+                    <h4 class="modal-add-footer">Выберете файл</h4>
+                    <button ngf-select
+                           ng-model="files"
+                           name="file"
+                           ngf-accept="'image/*'"
+                           ngf-max-size="10MB"
+                            multiple>
+                    Выберете файлы
+                    </button>
+                    <span ng-show="uploadForm.file.$error.maxSize">
+                    Нельзя загружать файлы размером больше 3 МБ
+                    </span>
+
+
+                </form>
 
                 <button class="btn btn-default"
                         type="button"

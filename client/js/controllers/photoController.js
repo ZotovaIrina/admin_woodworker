@@ -1,8 +1,8 @@
 var app = require("../app");
 
-app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$timeout', 'FileUploader',
-    'baseResourceURL', 'baseURL', '$state', '$cookies',
-    function ($scope, $stateParams, photoService, $timeout, FileUploader, baseResourceURL, baseURL, $state, $cookies) {
+app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$timeout',
+    'baseResourceURL', 'baseURL', '$state', '$cookies', 'Upload',
+    function ($scope, $stateParams, photoService, $timeout, baseResourceURL, baseURL, $state, $cookies, Upload) {
 
         // Photo for which page controller should get
         var id = $stateParams.id;
@@ -17,6 +17,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         $scope.alertColor = "";
         $scope.loadingSrc = baseResourceURL + "/712.gif";
         $scope.loadingShow = false;
+        $scope.files = [];
 
         if(user === undefined) {
             $state.go('login');
@@ -157,12 +158,17 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
             $scope.modalA = true;
         };
 
-        var uploader = $scope.uploader = new FileUploader({
-            url: baseURL + 'photo/'+ id + '/image',
-            method: "POST",
-            headers: {user: user},
-            formData: [{formData: 'one'}]
-        });
+
+        $scope.uploadFiles = function(files) {
+            $scope.files = files;
+            $scope.errFiles = errFiles;
+            angular.forEach(files, function(file) {
+                file.upload = Upload.upload({
+                    url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+                    data: {file: file}
+                });
+            });
+        };
 
 
         $scope.AddPhoto = function () {
@@ -170,25 +176,17 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
                 $state.go('login');
             }
             var newArray = angular.copy($scope.images);
-            angular.forEach(uploader.queue, function (item, key) {
-                var img = {};
-                img.name = item.file.name;
-                img.caption = item.caption;
-                newArray.push(img);
-            });
+            //angular.forEach(uploader.queue, function (item, key) {
+            //    var img = {};
+            //    img.name = item.file.name;
+            //    img.caption = item.caption;
+            //    newArray.push(img);
+            //});
             console.log(newArray);
             $scope.loadingShow = true;
             ApplyNewContent(newArray);
-            uploader.uploadAll();
-            uploader.onCompleteAll = function () {
-                $scope.loadingShow = false;
-                console.info('onCompleteAll');
-                $scope.images = angular.copy(newArray);
-                uploader.clearQueue();
-            };
-            $scope.modalClose();
 
-            //
+            $scope.modalClose();
         };
 
 

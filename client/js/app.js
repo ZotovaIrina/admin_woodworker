@@ -1,11 +1,11 @@
-var app = angular.module('admin_woodworker', ['ui.router', 'ngResource', 'ngAnimate', 'angularFileUpload', 'ngCookies']);
+var app = angular.module('admin_woodworker', ['ui.router', 'ngResource', 'ngAnimate', 'ngFileUpload', 'ngCookies']);
 
 app
 
-    .constant("baseResourceURL", "http://188.225.73.124:3000//resource")
-    .constant("baseURL", "http://188.225.73.124:3000/")
-    //.constant("baseResourceURL", "localhost:3000//resource")
-    //.constant("baseURL", "http://localhost:3000/")
+    //.constant("baseResourceURL", "http://188.225.73.124:3000//resource")
+    //.constant("baseURL", "http://188.225.73.124:3000/")
+    .constant("baseResourceURL", "localhost:3000//resource")
+    .constant("baseURL", "http://localhost:3000/")
     .config(['$stateProvider', '$urlRouterProvider',
         function ($stateProvider, $urlRouterProvider) {
             console.log("state provider");
