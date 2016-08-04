@@ -19,7 +19,7 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         $scope.loadingShow = false;
         $scope.files = [];
 
-        if(user === undefined) {
+        if (user === undefined) {
             $state.go('login');
         }
 
@@ -53,18 +53,21 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
 
 //local function for set data in content.json
         function ApplyNewContent(data) {
-            if(user === undefined) {
+            if (user === undefined) {
                 $state.go('login');
             }
             photoService.setContents(id, data)
                 .then(function (resource) {
                     if (resource.success) {
+                        $scope.loadingShow = false;
+                        $scope.images = data;
                         console.log(resource);
                         $scope.alert = true;
                         $scope.alertMessage = resource.textMessage;
                         $scope.alertColor = "alert-success";
-                    }})
-                    .catch(function (error) {
+                    }
+                })
+                .catch(function (error) {
                     console.log("catch error", error);
                     if (error.status == 401) {
                         console.log("catch error", error);
@@ -82,16 +85,16 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         // delete photo
         $scope.deletePhoto = function () {
             var name = $scope.activeImage.name;
+            var newArray = angular.copy($scope.images);
             var indexObj;
-            angular.forEach($scope.images, function (image, key) {
+            angular.forEach(newArray, function (image, key) {
                 if (angular.equals(name, image.name)) {
                     indexObj = key;
                 }
             });
             if (indexObj !== undefined) {
-                console.log("name ", name);
-                $scope.images.splice(indexObj, 1);
-                ApplyNewContent($scope.images);
+                newArray.splice(indexObj, 1);
+                ApplyNewContent(newArray);
                 photoService.delPhoto(id, name)
                     .then(function () {
                         console.log("Delete success");
@@ -133,8 +136,9 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
         //edit photo's caption set
         $scope.EditPhoto = function () {
             var indexObj;
+            var newArray = angular.copy($scope.images);
             var name = $scope.activeImage.name;
-            angular.forEach($scope.images, function (image, key) {
+            angular.forEach(newArray, function (image, key) {
                 if (angular.equals(name, image.name)) {
                     indexObj = key;
                 }
@@ -142,9 +146,9 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
             if (indexObj === undefined) {
                 console.log("Элемент не найден");
             } else {
-                $scope.images[indexObj].caption = $scope.activeImage.caption;
+                newArray[indexObj].caption = $scope.activeImage.caption;
                 //send data on the server then get message from server success = true or not and show the message
-                ApplyNewContent($scope.images);
+                ApplyNewContent(newArray);
 
             }
             $scope.modalClose();
@@ -158,35 +162,42 @@ app.controller('PhotoController', ['$scope', '$stateParams', 'photoService', '$t
             $scope.modalA = true;
         };
 
-
-        $scope.uploadFiles = function(files) {
-            $scope.files = files;
-            $scope.errFiles = errFiles;
-            angular.forEach(files, function(file) {
-                file.upload = Upload.upload({
-                    url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-                    data: {file: file}
-                });
-            });
-        };
-
-
         $scope.AddPhoto = function () {
-            if(user === undefined) {
+            if (user === undefined) {
                 $state.go('login');
             }
             var newArray = angular.copy($scope.images);
-            //angular.forEach(uploader.queue, function (item, key) {
-            //    var img = {};
-            //    img.name = item.file.name;
-            //    img.caption = item.caption;
-            //    newArray.push(img);
-            //});
-            console.log(newArray);
+            angular.forEach($scope.files, function (item, key) {
+                var img = {};
+                img.name = item.name;
+                img.caption = item.caption;
+                newArray.push(img);
+            });
             $scope.loadingShow = true;
-            ApplyNewContent(newArray);
+            photoService.addPhoto(id, newArray, $scope.files)
+                .then(function (response) {
+                    console.log("all photo has been upload", response);
+                    ApplyNewContent(newArray);
+                });
+
 
             $scope.modalClose();
+        };
+
+
+        $scope.removeNewPhoto = function (item) {
+            var indexObj;
+            angular.forEach($scope.files, function (image, key) {
+                if (angular.equals(item.name, image.name)) {
+                    indexObj = key;
+                }
+            });
+            if (indexObj !== undefined) {
+                $scope.files.splice(indexObj, 1);
+            } else {
+                console.log("Элемент не найден");
+            }
+
         };
 
 

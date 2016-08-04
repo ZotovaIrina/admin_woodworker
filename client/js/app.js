@@ -2,9 +2,9 @@ var app = angular.module('admin_woodworker', ['ui.router', 'ngResource', 'ngAnim
 
 app
 
-    //.constant("baseResourceURL", "http://188.225.73.124:3000//resource")
+    //.constant("baseResourceURL", "http://188.225.73.124:3000/resource")
     //.constant("baseURL", "http://188.225.73.124:3000/")
-    .constant("baseResourceURL", "localhost:3000//resource")
+    .constant("baseResourceURL", "localhost:3000/resource")
     .constant("baseURL", "http://localhost:3000/")
     .config(['$stateProvider', '$urlRouterProvider',
         function ($stateProvider, $urlRouterProvider) {

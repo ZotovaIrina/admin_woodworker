@@ -102,19 +102,21 @@
                         <div class="row">
                             <!-- Image preview -->
                             <div class="col-xs-12">
+                                <div class="col-sm-6 col-xs-12">
                                     <img ngf-src="file"
-                                         class="thumb imagePreview">
-                                <div class="imageComment">
+                                         class="thumb">
+                                </div>
+                                <div class="col-sm-6 col-xs-12">
                                     <p>Описание для файла {{ file.name }}:</p>
                                     <textarea class="form-control"
                                               rows="3"
-                                              ng-model="item.caption">
+                                              ng-model="file.caption">
                                      </textarea>
                                 </div>
-                                <div class="imageButton">
+                                <div class="col-xs-12 imageButton">
                                     <button type="button"
                                             class="btn btn-danger btn-xs"
-                                            ng-click="item.remove()">
+                                            ng-click="removeNewPhoto(file)">
                                         <span class="glyphicon glyphicon-trash"></span> Remove
                                     </button>
                                 </div>
@@ -126,16 +128,18 @@
 
             </div>
             <div class="modal-footer">
-                <form name="uploadForm">
-
-                    <h4 class="modal-add-footer">Выберете файл</h4>
-                    <button ngf-select
-                           ng-model="files"
-                           name="file"
-                           ngf-accept="'image/*'"
-                           ngf-max-size="10MB"
-                            multiple>
-                    Выберете файлы
+                <form id="uploadForm"
+                      name="uploadForm">
+                    <button class="btn btn-md btn-primary"
+                            id="add-button"
+                            ngf-select
+                            ng-model="files"
+                            name="file"
+                            ngf-accept="'image/*'"
+                            ngf-max-size="10MB"
+                            multiple
+                            ng-hide="files.length !== 0">
+                        Выберете файлы
                     </button>
                     <span ng-show="uploadForm.file.$error.maxSize">
                     Нельзя загружать файлы размером больше 3 МБ
@@ -152,7 +156,7 @@
                 <button class="btn btn-info"
                         type="button"
                         ng-click="AddPhoto()"
-                        ng-disabled="uploader.queue.length == 0">
+                        ng-disabled="files.length == 0">
                     OK
                 </button>
             </div>

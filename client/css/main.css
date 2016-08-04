@@ -199,33 +199,6 @@ title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > smal
   left: 50%;
 }
 
-.imagePreview {
-  display: inline-block;
-  vertical-align: middle;
-  width: auto;
-  margin-bottom: -5px;
-}
-@media screen and (max-width: 720px) {
-  .imagePreview {
-    display: block;
-  }
-}
-
-.imageComment {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 10px;
-  width: 300px;
-}
-@media screen and (max-width: 720px) {
-  .imageComment {
-    display: block;
-    margin-left: 0;
-    margin-top: 5px;
-    width: inherit;
-  }
-}
-
 .imageButton {
   margin-top: 7px;
 }
@@ -255,6 +228,22 @@ canvas {
   position: fixed;
   top: 45%;
   right: 45%;
+}
+
+.thumb {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  height: auto;
+}
+
+#add-button {
+  display: inherit;
+  left: 0;
+}
+
+#uploadForm {
+  width: 100%;
 }
 
 .animate-show {

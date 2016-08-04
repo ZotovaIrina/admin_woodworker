@@ -120,29 +120,6 @@ $photoWidth: $mediaWidth - 30px;
   left: 50%;
 }
 
-.imagePreview {
-  display: inline-block;
-  vertical-align: middle;
-  width: auto;
-  margin-bottom: -5px;
-  @media screen and (max-width: $screen-small) {
-    display: block;
-  }
-}
-
-.imageComment {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 10px;
-  width: 300px;
-  @media screen and (max-width: $screen-small) {
-    display: block;
-    margin-left: 0;
-    margin-top: 5px;
-    width: inherit;
-  }
-}
-
 .imageButton {
   margin-top: 7px;
 }
@@ -174,7 +151,21 @@ canvas {
   right: 45%;
 }
 
+.thumb {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  height: auto;
+}
 
+#add-button {
+  display: inherit;
+  left:0;
+}
+
+#uploadForm {
+  width:100%
+}
 
 
 
