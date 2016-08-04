@@ -11,7 +11,7 @@ $screen-large: 940px;
   margin: 0 auto;
   padding-top: 0;
   height: $header-height;
-  background: url($baseResourceURL + "/bg-body.png");
+  background: url("../image/bg-body.png");
   background-position: center top;
   background-size: 100% auto;
   color: $yellow;
@@ -25,7 +25,7 @@ $screen-large: 940px;
 #title {
   font-size: 3.8rem;
   text-align: center;
-  margin-top: 38px;
+  margin-top: 5px;
   margin-bottom: 0;
 }
 
