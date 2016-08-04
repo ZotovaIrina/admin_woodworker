@@ -11,7 +11,7 @@ $screen-large: 940px;
   margin: 0 auto;
   padding-top: 0;
   height: $header-height;
-  background: url("../image/bg-body.png");
+  background: url($baseResourceURL + "/bg-body.png");
   background-position: center top;
   background-size: 100% auto;
   color: $yellow;
